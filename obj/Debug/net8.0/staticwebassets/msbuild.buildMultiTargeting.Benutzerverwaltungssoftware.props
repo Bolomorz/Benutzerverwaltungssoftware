@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Benutzerverwaltungssoftware.props" />
+</Project>

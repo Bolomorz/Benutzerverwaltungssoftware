@@ -1,3 +1,6 @@
+using PdfSharp.Fonts;
+using PdfSharp.Snippets.Font;
+
 var builder = WebApplication.CreateBuilder(args);
 
 GlobalFontSettings.FontResolver = new FailsafeFontResolver();
