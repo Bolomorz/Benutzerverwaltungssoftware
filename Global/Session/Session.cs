@@ -13,7 +13,7 @@ internal class Session
     {
         var rd = UserManagementPacker.Authentification.Authenticate(user, password);
 
-        if(rd.Message.Success && rd.ReturnValue is not null) User = new(AuthenticatedUser.Role.User);
+        if(rd.Message.Success && rd.ReturnValue is not null) User = new(rd.ReturnValue);
 
         return new(rd.Message);
     }

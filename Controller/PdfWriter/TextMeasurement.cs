@@ -3,7 +3,7 @@ using PdfSharp.Pdf.IO;
 
 namespace Benutzerverwaltungssoftware.Pdf;
 
-internal class PdfTextMeasurements
+internal class TextMeasurements
 {
     private enum BlockType {Text, Space, Hyphen, LineBreak}
 
@@ -38,7 +38,7 @@ internal class PdfTextMeasurements
     XRect LayoutRectangle {get; set;}
     List<Block> Blocks {get; set;}
 
-    public PdfTextMeasurements(XGraphics gfx, string text, XFont font, XRect rect)
+    public TextMeasurements(XGraphics gfx, string text, XFont font, XRect rect)
     {
         Gfx = gfx;
         Text = text;
@@ -47,15 +47,14 @@ internal class PdfTextMeasurements
         Blocks = new List<Block>();
     }
 
-    public void MeasureText(out int lastchar, out double neededheight)
+    public double MeasureText()
     {
         double linespace = Font.GetHeight();
         double cyAscent = linespace * Font.CellAscent / Font.CellSpace;
         double cyDescent = linespace * Font.CellDescent / Font.CellSpace;
         double spaceWidth = Gfx.MeasureString("x x", Font).Width - Gfx.MeasureString("xx", Font).Width;
 
-        lastchar = -1;
-        neededheight = double.MinValue;
+        double neededheight = double.MinValue;
 
         CreateBlocks();
         CreateLayout(cyAscent, cyDescent, linespace, spaceWidth);
@@ -68,24 +67,24 @@ internal class PdfTextMeasurements
             var block = Blocks[i];
             if(block.Stop)
             {
-                lastchar = 0;
                 int j = i - 1;
                 while(j >=0)
                 {
                     var block2 = Blocks[j];
                     if(block2.EndIndex >= 0)
                     {
-                        lastchar = block2.EndIndex;
                         neededheight = dy + block2.Location.Y;
-                        return;
+                        return neededheight;
                     }
                     --j;
                 }
-                return;
+                return neededheight;
             }
             if(block.Type == BlockType.LineBreak) continue;
             neededheight = dy + block.Location.Y;
         }
+
+        return neededheight;
     }
     void CreateBlocks()
     {

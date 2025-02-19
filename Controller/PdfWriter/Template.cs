@@ -2,21 +2,22 @@ namespace Benutzerverwaltungssoftware.Pdf;
 
 internal static class PdfWriter
 {
-    internal static PdfFile Write(PdfTemplate template) => template.Write();
+    internal static PdfFile Write(Template template) => template.Write();
 }
 
-internal abstract class PdfTemplate
+internal abstract class Template
 {
-    protected abstract PdfDocumentItem Document { get; set; }
-    protected abstract PdfDrawingInformation Information { get; set; }
-    protected abstract List<ITemplateItem> Items { get; set; }
+    protected abstract DocumentItem Document { get; set; }
+    protected abstract DocumentInformation Information { get; set; }
+    protected abstract List<TemplateItemCollection> Items { get; set; }
+    protected abstract void FillItems();
     public PdfFile Write()
     {
-        foreach(var Item in Items)
+        FillItems();
+        foreach(var item in Items.Where(x => x.IsStatic())) item.DrawCollection(Document, Information);
+        foreach(var item in Items.Where(x => x.IsDynamic()))
         {
-            Item.CalcParameters(Document, Information);
-            Item.AdjustNewPage(Document, Information);
-            Item.Draw(Document, Information);
+            if(item.DrawCollection(Document, Information)) foreach(var repeat in Items.Where(x => x.IsStaticRepeat())) repeat.DrawCollection(Document, Information);
         }
         var file = Document.GetFile();
         return file is not null ? new PdfFile(){ Success = true, Data = file } : new PdfFile(){ Success = false };

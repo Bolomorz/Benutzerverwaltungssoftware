@@ -29,7 +29,7 @@ internal class PdfFile
     }
 }
 
-internal class PdfDocumentItem
+internal class DocumentItem
 {
     private PdfDocument Document;
     private List<PdfPage> Pages;
@@ -42,14 +42,14 @@ internal class PdfDocumentItem
     private string? PageLayoutLinux;
     private string? PageLayoutWindows;
 
-    internal PdfDocumentItem(string title, FileType type, string? pagelayoutpng)
+    internal DocumentItem(string title, FileType type, PageOrientation orientation, string? pagelayoutpng)
     {
         Title = title;
         PageLayoutLinux = pagelayoutpng is not null ? $"Resources/{pagelayoutpng}" : null;
         PageLayoutWindows = pagelayoutpng is not null ? $@"Resources\{pagelayoutpng}" : null;
         Type = type;
         PageSize = PageSize.A4;
-        PageOrientation = PageOrientation.Portrait;
+        PageOrientation = orientation;
         Index = 0;
         Document = new();
         Document.Info.Title = Title;
@@ -97,22 +97,26 @@ internal class PdfDocumentItem
     private void DrawImage(XGraphics gfx, string file)
     {
         XImage img = XImage.FromFile(file);
-        XRect rect = new(new XPoint(0,0), new XPoint(PdfSettings.A4Width, PdfSettings.A4Height));
+        XRect rect = new(new XPoint(0,0), 
+            PageOrientation == PageOrientation.Portrait ? new XPoint(Settings.CPortrait.A4Width, Settings.CPortrait.A4Height) : new XPoint(Settings.CLandscape.A4Width, Settings.CLandscape.A4Height));
         gfx.DrawImage(img, rect);
     }
     private void DrawTitle(XGraphics gfx, string title)
     {
-        XRect rect = new(new XPoint(PdfSettings.PageLayout.VerticalStart, PdfSettings.A4Height - 15), new XPoint(PdfSettings.A4Width, PdfSettings.A4Height - 5));
+        XRect rect = PageOrientation is PageOrientation.Portrait ? 
+        new(new XPoint(Settings.PageLayoutPortrait.HorizontalStart, Settings.CPortrait.A4Height - 15), new XPoint(Settings.PageLayoutPortrait.HorizontalEnd, Settings.CPortrait.A4Height - 5)) :
+        new(new XPoint(Settings.PageLayoutLandscape.HorizontalStart, Settings.CLandscape.A4Height - 15), new XPoint(Settings.PageLayoutLandscape.HorizontalEnd, Settings.CLandscape.A4Height - 5));
         XStringFormat format = new(){LineAlignment = XLineAlignment.Center, Alignment = XStringAlignment.Near};
         XFont font = new XFont("Arial", 5);
         gfx.DrawString(title??" ", font, XBrushes.Black, rect, format);
     }
     private void DrawNumber(XGraphics gfx, string nr)
     {
-        XRect rect = new(new XPoint(PdfSettings.A4Width - 50, PdfSettings.A4Height - 50), new XPoint(PdfSettings.A4Width, PdfSettings.A4Height));
+        XRect rect = PageOrientation is PageOrientation.Portrait ?
+        new(new XPoint(Settings.CPortrait.A4Width - 50, Settings.CPortrait.A4Height - 50), new XPoint(Settings.CPortrait.A4Width, Settings.CPortrait.A4Height)) :
+        new(new XPoint(Settings.CLandscape.A4Width - 50, Settings.CLandscape.A4Height - 50), new XPoint(Settings.CLandscape.A4Width, Settings.CLandscape.A4Height));
         XStringFormat format = new(){LineAlignment = XLineAlignment.Center, Alignment = XStringAlignment.Center};
         XFont font = new XFont("Arial", 30);
         gfx.DrawString(nr, font, XBrushes.Black, rect, format);
     }
-
 }
