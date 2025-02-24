@@ -6,9 +6,10 @@ public class Message
     internal MID MID { get; set; }
     internal string Error { get; set; }
 
-    internal static Message FailedToCreateDatabase = new(MID.Connection, false, "failed to create database");
-    internal static Message Successful = new(MID.Successful, true, "performing operation successful");
-    internal static Message UnauthorizedAccess = new(MID.UnauthorizedAccess, false, "unauthorized access prohibited");
+    internal static Message ConnectionFailed = new(MID.Connection, false, "Datenbankverbindung konnte nicht erfolgreich hergestellt werden.");
+    internal static Message OperationSuccessful = new(MID.Successful, true, "Operation erfolgreich ausgefuehrt.");
+    internal static Message ConnectionSuccessful = new(MID.Successful, true, "Datenbankverbindung erfolgreich hergestellt.");
+    internal static Message UnauthorizedAccess = new(MID.UnauthorizedAccess, false, "Nicht authorisierter Zugriff.");
     
     internal Message(MID mid, bool success, string error)
     {

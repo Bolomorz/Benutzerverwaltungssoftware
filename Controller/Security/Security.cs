@@ -12,7 +12,7 @@ internal static class Security
 
         var hash = CalculateHash(param, password, username);
 
-        return new(Message.Successful, new()
+        return new(Message.OperationSuccessful, new()
         {
             Name = username,
             PasswordHash = hash,
@@ -30,7 +30,7 @@ internal static class Security
 
         var auth = Compare(hash, account.PasswordHash);
 
-        return auth ? new(Message.Successful) : new(new(MID.UnauthorizedAccess, false, "authorization not successful"));
+        return auth ? new(Message.OperationSuccessful) : new(new(MID.UnauthorizedAccess, false, "authorization not successful"));
     }
     private static string CalculateHash(HashParameter param, string plain, string username)
     {

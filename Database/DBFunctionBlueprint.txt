@@ -1,0 +1,93 @@
+        internal static ReturnDialog<List<.>> Get.()
+        {
+            using var cm = new CustomerManagementContext();
+
+            try
+            {
+                if(cm.s is null) return new(Message.FailedToCreateDatabase, null);
+
+                return new(Message.Successful, cm.s
+                .ToList());
+            }
+            catch(Exception ex)
+            {
+                return new(new(MID.ErrorThrown, false, $"error in cm.Get: {ex}"), null);
+            }
+        }
+        internal static ReturnDialog<.> Get.(int .)
+        {
+            using var cm = new CustomerManagementContext();
+
+            try
+            {
+                if(gm.s is null) return new(Message.FailedToCreateDatabase, null);
+
+                var p = cm.s
+                .FirstOrDefault(x => x.PID == pid);
+
+                return . is not null ? new(Message.Successful, .) : new(new(MID.NotFound, false, $"did not find object with id {.}"), null);
+            }
+            catch(Exception ex)
+            {
+                return new(new(MID.ErrorThrown, false, $"error in cm.Get: {ex.ToString()}"), null);
+            }
+        }
+        internal static ReturnDialog Save.(, int? .)
+        {
+            using var cm = new CustomerManagementContext();
+            using var transaction = cm.Database.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
+
+            try
+            {
+                if(cm.s is null) { transaction.Rollback(); return new(Message.FailedToCreateDatabase); }
+
+                var . = . is not null ? cm.s.FirstOrDefault(x => x. == .) : null;
+
+                if(. is null || . is null)
+                {
+                    cm.s.Add(new()
+                    {
+                        . = ;
+                    });
+                } 
+                else
+                {
+                    . = ;
+                }
+
+                cm.SaveChanges();
+
+                transaction.Commit();
+
+                return new(Message.Successful);
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                return new(new(MID.ErrorThrown, false, $"error in cm.Save: {ex}"));
+            }
+        }
+        internal static ReturnDialog Delete.(int .)
+        {
+            using var cm = new CustomerManagementContext();
+            using var transaction = cm.Database.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
+
+            try
+            {
+                if(cm.s is null) { transaction.Rollback(); return new(Message.FailedToCreateDatabase); }
+
+                var . = cm.s.FirstOrDefault(x => x. == .);
+                if(. is not null) cm.s.Remove(old);
+
+                cm.SaveChanges();
+
+                transaction.Commit();
+
+                return new(Message.Successful);
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                return new(new(MID.ErrorThrown, false, $"error in cm.Delete: {ex}"));
+            }
+        }

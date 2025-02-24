@@ -17,4 +17,17 @@ internal class Session
 
         return new(rd.Message);
     }
+
+    internal static ReturnDialog TestDatabaseConnection()
+    {
+        var rd = UserManagementPacker.TestDatabaseConnection();
+        
+        if(!rd.Message.Success)
+        {
+            var wl = UserManagementPacker.Logs.WriteLog("TestDatabaseConnection", rd.Message.Error, null, null);
+            if(!wl.Message.Success) throw new Exception(wl.Message.Error);
+        }
+
+        return rd;
+    }
 }
