@@ -83,7 +83,6 @@
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/obj/Debug/net8.0/Benutzerverwaltungssoftware.pdb
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/obj/Debug/net8.0/Benutzerverwaltungssoftware.genruntimeconfig.cache
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/obj/Debug/net8.0/ref/Benutzerverwaltungssoftware.dll
-/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/obj/Debug/net8.0/scopedcss/Pages/Login/Login.cshtml.rz.scp.css
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Humanizer.dll
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Microsoft.Build.Locator.dll
@@ -167,4 +166,6 @@
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Database/DBFunctionBlueprint.txt
-/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Database/dbbase.sqlite
+/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Database/db2025.sqlite
+/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Database/db2025.sqlite-shm
+/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/bin/Debug/net8.0/Database/db2025.sqlite-wal

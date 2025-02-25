@@ -1,6 +1,6 @@
 using Benutzerverwaltungssoftware.Data;
 
-namespace Benutzerverwaltungssoftware.Pages.Login;
+namespace Benutzerverwaltungssoftware.Pages.PageSession;
 
 internal static class Information
 {

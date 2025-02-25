@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Benutzerverwaltungssoftware</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Kundenverwaltung</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,22 +20,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Login/Login">Login</a>
+                            @if(Global.Session is not null && Global.Session.User is not null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-page="/PageSession/Logout">Logout</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-page="/PageSession/Login">Login</a>
+                            }
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container" style="width: 80%; margin: auto; max-width: 80%;">
-        <main role="main" class="pb-3" style="width: 80%; margin: auto; max-width: 80%;">
+    <div class="container" style="width: 85%; margin: auto; max-width: 85%;">
+        <main role="main" class="pb-3" style="width: 95%; margin: auto; max-width: 95%;">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Benutzerverwaltungssoftware - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - Kundenverwaltung
         </div>
     </footer>
 

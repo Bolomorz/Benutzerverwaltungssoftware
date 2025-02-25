@@ -26,8 +26,8 @@ public class Customer
     public DateTime? JoinDate { get; set; }
     public decimal? PaidAmount { get; set; }
 
-    List<CustomerInvoiceItem> CustomerInvoiceItems { get; set; } = new();
-    List<CustomerFile> CustomerFiles { get; set;} = new();
+    public List<CustomerInvoiceItem> CustomerInvoiceItems { get; set; } = new();
+    public List<CustomerFile> CustomerFiles { get; set;} = new();
 }
 
 public class InvoiceItem
@@ -38,7 +38,7 @@ public class InvoiceItem
     public decimal? DefaultValue { get; set; }
     public string? TransformFormula { get; set; }
 
-    List<CustomerInvoiceItem> CustomerInvoiceItems { get; set; } = new();
+    public List<CustomerInvoiceItem> CustomerInvoiceItems { get; set; } = new();
 }
 
 public class CustomerInvoiceItem

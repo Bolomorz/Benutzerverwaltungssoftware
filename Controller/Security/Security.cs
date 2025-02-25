@@ -4,7 +4,7 @@ using Benutzerverwaltungssoftware.Data;
 
 namespace Benutzerverwaltungssoftware.Security;
 
-internal static class Security
+internal static class Hashing
 {
     internal static ReturnDialog<UserAccount> GenerateUserData(string username, string password)
     {

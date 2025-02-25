@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Benutzerverwaltungssoftware.Migrations
 {
     [DbContext(typeof(CustomerManagementContext))]
-    [Migration("20250224131939_InitialMigration")]
+    [Migration("20250225144159_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -185,7 +185,7 @@ namespace Benutzerverwaltungssoftware.Migrations
             modelBuilder.Entity("Benutzerverwaltungssoftware.Data.CustomerFile", b =>
                 {
                     b.HasOne("Benutzerverwaltungssoftware.Data.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("CustomerFiles")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -196,13 +196,13 @@ namespace Benutzerverwaltungssoftware.Migrations
             modelBuilder.Entity("Benutzerverwaltungssoftware.Data.CustomerInvoiceItem", b =>
                 {
                     b.HasOne("Benutzerverwaltungssoftware.Data.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("CustomerInvoiceItems")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Benutzerverwaltungssoftware.Data.InvoiceItem", "InvoiceItem")
-                        .WithMany()
+                        .WithMany("CustomerInvoiceItems")
                         .HasForeignKey("InvoiceItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -210,6 +210,18 @@ namespace Benutzerverwaltungssoftware.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("InvoiceItem");
+                });
+
+            modelBuilder.Entity("Benutzerverwaltungssoftware.Data.Customer", b =>
+                {
+                    b.Navigation("CustomerFiles");
+
+                    b.Navigation("CustomerInvoiceItems");
+                });
+
+            modelBuilder.Entity("Benutzerverwaltungssoftware.Data.InvoiceItem", b =>
+                {
+                    b.Navigation("CustomerInvoiceItems");
                 });
 #pragma warning restore 612, 618
         }

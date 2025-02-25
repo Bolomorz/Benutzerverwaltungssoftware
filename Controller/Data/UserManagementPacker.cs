@@ -59,7 +59,7 @@ internal static class UserManagementPacker
 
                 if(user is null) return new(new(MID.NotFound, false, $"Der Nutzer mit Name {username} wurde nicht gefunden!"), null);
 
-                var auth = Security.Security.Authenticate(user, plainpw);
+                var auth = Hashing.Authenticate(user, plainpw);
 
                 return auth.Message.Success ? new(Message.OperationSuccessful, user) : new(auth.Message, null);
             }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Dk06jIjBNseSCwV5ha+AylvbZJ7y1Qytq9JLNBvFbo4=",
+  "Hash": "XmRXKqeQxqiMBvG03c33Uzy3k8cCm4n3dl/1Rb6clCw=",
   "Source": "Benutzerverwaltungssoftware",
   "BasePath": "_content/Benutzerverwaltungssoftware",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/obj/Debug/net8.0/scopedcss/projectbundle/Benutzerverwaltungssoftware.bundle.scp.css"
+    },
+    {
+      "Identity": "/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/wwwroot/css/images/background.jpg",
+      "SourceId": "Benutzerverwaltungssoftware",
+      "SourceType": "Discovered",
+      "ContentRoot": "/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/wwwroot/",
+      "BasePath": "_content/Benutzerverwaltungssoftware",
+      "RelativePath": "css/images/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/images/background.jpg"
     },
     {
       "Identity": "/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/wwwroot/css/site.css",

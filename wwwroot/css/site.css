@@ -19,4 +19,148 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: url("./images/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.base{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: white;
+  background-color: rgb(37, 0, 0);
+  border: 1px solid rgb(3, 0, 0);
+  border-radius: 30px;
+  box-shadow: 0 0 50px rgb(37, 0, 0);
+}
+
+.status{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: rgb(170, 104, 5);
+  border: 1px solid rgb(170, 104, 5);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgb(170, 104, 5);
+}
+
+.login{
+  width: 30%;
+  margin-left: 10px;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+  background-color: rgb(170, 104, 5);
+  border: 1px solid rgb(170, 104, 5);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgb(170, 104, 5);
+}
+.login table{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.login td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.login tr td:first-child{
+  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
+  word-break: break-all;
+}
+
+.select{
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+  background-color: rgb(170, 104, 5);
+  box-shadow: 0 0 10px rgb(170, 104, 5);
+}
+.select table{
+  width: 100%;
+  margin: 0px;
+}
+.select td{
+  padding-top: 1px;
+  padding-bottom: 1px;
+  width: 33%;
+  height: 40px;
+}
+.select-top{
+  width: 98%;
+  height: 98%;
+  margin: auto;
+  background-color: gold;
+  color: black;
+}
+.select-top:hover{
+  background-color: rgb(56, 48, 0);
+  color: white;
+}
+.select-lower{
+  width: 96%;
+  height: 96%;
+  margin: auto;
+  background-color: goldenrod;
+  color: black;
+}
+.select-lower:hover{
+  background-color: rgb(41, 31, 6);
+  color: white;
+}
+
+.data{
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(206, 232, 255);
+  text-align: center;
+}
+
+p{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid; 
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+input{
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: black;
+}
+
+.nav{
+  background-color: rgb(234, 250, 6);
+}
+.nav:hover{
+  background-color: rgb(54, 58, 1);
+  color: white;
+}
+.del{
+  background-color: rgb(250, 93, 93);
+}
+.del:hover{
+  background-color: rgb(51, 0, 0);
+  color: white;
 }

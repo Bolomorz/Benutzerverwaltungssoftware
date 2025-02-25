@@ -1,0 +1,37 @@
+@page
+@model Benutzerverwaltungssoftware.Pages.PageSession.LoginModel
+
+<div class="base">
+    <div class="login">
+        <form method="post">
+            <table class="login">
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" asp-for="@Model.LDM.Username"/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" asp-for="@Model.LDM.Password"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input class="nav" type="submit" value="Login" asp-page-handler="Login"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="status">
+        <h4>Status</h4>
+        @if(Information.Message is not null)
+        {
+            if(Information.Message.Success)
+            {
+                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+            }
+            else
+            {
+                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+            }
+        }
+    </div>
+</div>
