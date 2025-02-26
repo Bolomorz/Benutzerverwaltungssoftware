@@ -26,6 +26,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware
 build_property._RazorSourceGeneratorDebug = 
 
+[/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudC9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,14 +68,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Management/_InvoiceItemList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFuYWdlbWVudC9fSW52b2ljZUl0ZW1MaXN0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/PageSession/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGFnZVNlc3Npb24vTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/PageSession/Logout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGFnZVNlc3Npb24vTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Shared/_ValidationScriptsPartial.cshtml]

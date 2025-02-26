@@ -1,5 +1,5 @@
 @page
-@model Benutzerverwaltungssoftware.Pages.PageSession.LoginModel
+@model Benutzerverwaltungssoftware.Pages.Account.LoginModel
 
 <div class="base">
     <div class="login">
@@ -22,15 +22,15 @@
 
     <div class="status">
         <h4>Status</h4>
-        @if(Information.Message is not null)
+        @if(Account.Information.Message is not null)
         {
-            if(Information.Message.Success)
+            if(Account.Information.Message.Success)
             {
-                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
             }
             else
             {
-                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
             }
         }
     </div>

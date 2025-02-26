@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Benutzerverwaltungssoftware.Pages.PageSession;
+namespace Benutzerverwaltungssoftware.Pages.Account;
 
 public class LoginModel : PageModel
 {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Benutzerverwaltungssoftware")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d66f5fca6e11ef9738a402d018c9e39438aa6267")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfc5d96a33c66ae4b1d54055a33a8a18ea5988fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Benutzerverwaltungssoftware")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Benutzerverwaltungssoftware")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

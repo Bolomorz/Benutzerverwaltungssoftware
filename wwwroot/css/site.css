@@ -17,6 +17,15 @@ html {
   min-height: 100%;
 }
 
+:root{
+  --BaseColor: rgb(49, 0, 0);
+  --ElementColor: rgb(71, 37, 37);
+  --NavColor: gold;
+  --NavHoverColor: rgb(112, 97, 1);
+  --DelColor: rgb(253, 11, 51);
+  --DelHoverColor: rgb(88, 0, 16);
+}
+
 body {
   margin-bottom: 60px;
   background-image: url("./images/background.jpg");
@@ -26,46 +35,61 @@ body {
 }
 
 .base{
-  width: 95%;
+  width: 98%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
   text-align: center;
   color: white;
-  background-color: rgb(37, 0, 0);
-  border: 1px solid rgb(3, 0, 0);
-  border-radius: 30px;
-  box-shadow: 0 0 50px rgb(37, 0, 0);
+  background-color: var(--BaseColor);
+  box-shadow: 0 0 50px var(--BaseColor);
+  overflow: auto;
+}
+.base table{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.base tr td:last-child
+{
+  vertical-align: top;
+}
+.base tr td:first-child{
+  width: 10%;
+  min-width: 10%;
+  max-width: 10%;
+  word-break: break-all;
 }
 
 .status{
   width: 95%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
-  background-color: rgb(170, 104, 5);
-  border: 1px solid rgb(170, 104, 5);
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgb(170, 104, 5);
+  background-color: var(--ElementColor);
+  box-shadow: 0 0 10px var(--ElementColor);
 }
 
 .login{
   width: 30%;
-  margin-left: 10px;
+  margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 50px;
   text-align: center;
-  background-color: rgb(170, 104, 5);
-  border: 1px solid rgb(170, 104, 5);
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgb(170, 104, 5);
+  background-color: var(--ElementColor);
+  box-shadow: 0 0 10px var(--ElementColor);
 }
 .login table{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .login td{
   padding-top: 10px;
@@ -82,11 +106,9 @@ body {
   width: 98%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 50px;
   text-align: center;
-  background-color: rgb(170, 104, 5);
-  box-shadow: 0 0 10px rgb(170, 104, 5);
+  background-color: var(--ElementColor);
+  box-shadow: 0 0 10px var(--ElementColor);
 }
 .select table{
   width: 100%;
@@ -95,29 +117,29 @@ body {
 .select td{
   padding-top: 1px;
   padding-bottom: 1px;
-  width: 33%;
-  height: 40px;
+  width: 100%;
+  height: 80px;
 }
 .select-top{
   width: 98%;
   height: 98%;
   margin: auto;
-  background-color: gold;
+  background-color: var(--NavColor);
   color: black;
 }
 .select-top:hover{
-  background-color: rgb(56, 48, 0);
+  background-color: var(--NavHoverColor);
   color: white;
 }
 .select-lower{
   width: 96%;
   height: 96%;
   margin: auto;
-  background-color: goldenrod;
+  background-color: var(--NavColor);
   color: black;
 }
 .select-lower:hover{
-  background-color: rgb(41, 31, 6);
+  background-color: var(--NavHoverColor);
   color: white;
 }
 
@@ -125,7 +147,8 @@ body {
   width: 98%;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgb(206, 232, 255);
+  margin-top: 10px;
+  background-color: var(--ElementColor);
   text-align: center;
 }
 
@@ -151,16 +174,16 @@ input{
 }
 
 .nav{
-  background-color: rgb(234, 250, 6);
+  background-color: var(--NavColor);
 }
 .nav:hover{
-  background-color: rgb(54, 58, 1);
+  background-color: var(--NavHoverColor);
   color: white;
 }
 .del{
-  background-color: rgb(250, 93, 93);
+  background-color: var(--DelColor);
 }
 .del:hover{
-  background-color: rgb(51, 0, 0);
+  background-color: var(--DelHoverColor);
   color: white;
 }

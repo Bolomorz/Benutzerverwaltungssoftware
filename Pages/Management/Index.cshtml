@@ -2,58 +2,48 @@
 @model Benutzerverwaltungssoftware.Pages.Management.ManagementModel
 
 <div class="base">
-    <div class="select">
-        <form method="post">
-            <table class="select">
-                <tr>
-                    <td><input class="select-top" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td>
-                    <td><input class="select-top" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td>
-                    <td><input class="select-top" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td>
-                </tr>
-                <tr>
-                @if(Information.CustomerID is not null && Information.CustomerID > 0)
-                {
-                    <td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                    <td><input class="select-top" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td>
-                    <td></td>
-                </tr>            
-                @if(Information.CustomerID is not null && Information.CustomerID > 0)
-                {
-                    <tr>
-                        <td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                }
-            </table>
-        </form>
-    </div>
+    <table class="base">
+        <tr>
+            <td>
+                <div class="select">
+                    <form method="post">
+                        <table class="select">
+                            <tr><td><input class="select-top" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td></tr>
+                            <tr><td><input class="select-top" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td><input class="select-top" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
+                            <tr><td><input class="select-top" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
 
-    <div class="data">
-        @switch(Information.Partial)
-        {
-            case Management.Partial.CustomerData: 
-            <partial name="/Pages/Management/_CustomerData.cshtml" for="@Model.CDM"/> break;
-            case Management.Partial.CustomerFile:
-            <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
-            case Management.Partial.CustomerInvoiceItem:
-            <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
-            case Management.Partial.CustomerList:
-            <partial name="/Pages/Management/_CustomerList.cshtml"/> break;
-            case Management.Partial.InvoiceItem:
-            <partial name="/Pages/Management/_InvoiceItem.cshtml" for="@Model.IIDM"/> break;
-            case Management.Partial.InvoiceItemList:
-            <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
-        }
-    </div>
+                            @if(Information.CustomerID is not null && Information.CustomerID > 0)
+                            {
+                                <tr><td></td></tr>
+                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
+                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
+                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
+                            }
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="data">
+                    @switch(Information.Partial)
+                    {
+                        case Management.Partial.CustomerData: 
+                        <partial name="/Pages/Management/_CustomerData.cshtml" for="@Model.CDM"/> break;
+                        case Management.Partial.CustomerFile:
+                        <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
+                        case Management.Partial.CustomerInvoiceItem:
+                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
+                        case Management.Partial.CustomerList:
+                        <partial name="/Pages/Management/_CustomerList.cshtml"/> break;
+                        case Management.Partial.InvoiceItem:
+                        <partial name="/Pages/Management/_InvoiceItem.cshtml" for="@Model.IIDM"/> break;
+                        case Management.Partial.InvoiceItemList:
+                        <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
