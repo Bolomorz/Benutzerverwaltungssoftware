@@ -24,16 +24,12 @@ public class CustomerManagementContext : DbContext
     {
         DbPath = $"Database/db{year}.sqlite";
 
-        Console.WriteLine(DbPath);
-
         Database.Migrate();
         SaveChanges();
     }
     public CustomerManagementContext()
     {
         DbPath = $"Database/dbbase.sqlite";
-
-        Console.WriteLine(DbPath);
     }
 
     protected override void OnModelCreating(ModelBuilder mb) => base.OnModelCreating(mb);
