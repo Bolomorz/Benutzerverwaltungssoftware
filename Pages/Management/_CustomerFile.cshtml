@@ -1,1 +1,24 @@
-<h1>CustomerFile</h1>
+@if(Account.Information.Message is not null)
+{
+    <div class="status">
+        @if(Account.Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <table class="data">
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</form>

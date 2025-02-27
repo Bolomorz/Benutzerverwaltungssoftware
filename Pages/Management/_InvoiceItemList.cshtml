@@ -1,1 +1,47 @@
-<h1>InvoiceItemList</h1>
+@{
+    var rd = Global.Session is not null && Global.Session.User is not null ?  Global.Session.User.GetInvoiceItems() : null;
+    if(rd is not null) Information.Message = rd.Message;
+}
+
+@if(Account.Information.Message is not null)
+{
+    <div class="status">
+        @if(Account.Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+        }
+    </div>
+}
+
+@if(rd is not null && rd.Message.Success && rd.ReturnValue is not null)
+{   
+    <form method="post">
+        <table class="data">
+            <thead>
+                <tr>
+                    <th style="width: 40%;">Name</th>
+                    <th style="width: 20%;">Standardwert</th>
+                    <th style="width: 20%;">Summe</th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in rd.ReturnValue)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.DefaultValue</td>
+                        <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems)</td>
+                        <td><input class="nav" type="submit" asp-page-handler="PickInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Bearbeiten"/></td>
+                        <td><input class="del" type="submit" asp-page-handler="DeleteInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Löschen"/></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+}

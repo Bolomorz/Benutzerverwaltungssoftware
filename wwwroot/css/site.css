@@ -24,6 +24,9 @@ html {
   --NavHoverColor: rgb(112, 97, 1);
   --DelColor: rgb(253, 11, 51);
   --DelHoverColor: rgb(88, 0, 16);
+  --THeadColor: brown;
+  --TBodyEvenColor: orange;
+  --TBodyOddColor: darkorange;
 }
 
 body {
@@ -151,6 +154,29 @@ body {
   background-color: var(--ElementColor);
   text-align: center;
 }
+.data table{
+  border-collapse: collapse;
+  width: 100%;
+  color: black;
+}
+.data thead th{
+  background-color: var(--THeadColor);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  max-height: 50px;
+}
+.data th, .data td{
+  padding: 10px;
+  text-align: left;
+}
+.data tbody tr:nth-of-type(even) {
+  background-color: var(--TBodyEvenColor);
+}
+.data tbody tr:nth-of-type(odd) {
+  background-color: var(--TBodyOddColor);
+}
+
 
 p{
   width: 80%;

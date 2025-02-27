@@ -27,16 +27,17 @@ public class LoginModel : PageModel
 
     public IActionResult OnPostLogin()
     {
-        if(LDM is null || LDM.Username is null || LDM.Username == string.Empty || LDM.Password is null || LDM.Password == string.Empty)
+        var rdv = LDM.Validate();
+        if(!rdv.Message.Success)
         {
-            Information.Message = new(Data.MID.NullValue, false, $"Fehlende Daten. Geben Sie alle Daten ein.");
+            Information.Message = rdv.Message;
             return Page();
         }
 
-        var rd = Global.OpenSession(LDM.Username, LDM.Password);
+        var rds = Global.OpenSession(LDM.Username, LDM.Password);
 
-        Information.Message = rd.Message;
+        Information.Message = rds.Message;
 
-        return rd.Message.Success && Global.Session?.User is not null ? RedirectToPage("/Management/Index") : Page();
+        return rds.Message.Success && Global.Session?.User is not null ? RedirectToPage("/Management/Index") : Page();
     }
 }

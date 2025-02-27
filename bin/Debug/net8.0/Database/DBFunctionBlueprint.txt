@@ -1,31 +1,30 @@
-        internal static ReturnDialog<List<.>> Get.()
+        internal static ReturnDialog<List<.>> GetAll()
         {
             using var cm = new CustomerManagementContext();
 
             try
             {
-                if(cm.s is null) return new(Message.FailedToCreateDatabase, null);
+                if(cm.s is null) return new(Message.ConnectionFailed, null);
 
-                return new(Message.Successful, cm.s
-                .ToList());
+                return new(Message.OperationSuccessful, .);
             }
             catch(Exception ex)
             {
                 return new(new(MID.ErrorThrown, false, $"error in cm.Get: {ex}"), null);
             }
         }
-        internal static ReturnDialog<.> Get.(int .)
+        internal static ReturnDialog<.> GetOne(int .)
         {
             using var cm = new CustomerManagementContext();
 
             try
             {
-                if(gm.s is null) return new(Message.FailedToCreateDatabase, null);
+                if(cm.s is null) return new(Message.ConnectionFailed, null);
 
                 var p = cm.s
                 .FirstOrDefault(x => x.PID == pid);
 
-                return . is not null ? new(Message.Successful, .) : new(new(MID.NotFound, false, $"did not find object with id {.}"), null);
+                return . is not null ? new(Message.OperationSuccessful, .) : new(new(MID.NotFound, false, $"did not find object with id {.}"), null);
             }
             catch(Exception ex)
             {
@@ -39,18 +38,18 @@
 
             try
             {
-                if(cm.s is null) { transaction.Rollback(); return new(Message.FailedToCreateDatabase); }
+                if(cm.s is null) { transaction.Rollback(); return new(Message.ConnectionFailed); }
 
                 var . = . is not null ? cm.s.FirstOrDefault(x => x. == .) : null;
 
-                if(. is null || . is null)
+                if(. is null)
                 {
                     cm.s.Add(new()
                     {
                         . = ;
                     });
                 } 
-                else
+                else if(. is not null)
                 {
                     . = ;
                 }
@@ -59,7 +58,7 @@
 
                 transaction.Commit();
 
-                return new(Message.Successful);
+                return new(Message.OperationSuccessful);
             }
             catch(Exception ex)
             {
@@ -74,7 +73,7 @@
 
             try
             {
-                if(cm.s is null) { transaction.Rollback(); return new(Message.FailedToCreateDatabase); }
+                if(cm.s is null) { transaction.Rollback(); return new(Message.ConnectionFailed); }
 
                 var . = cm.s.FirstOrDefault(x => x. == .);
                 if(. is not null) cm.s.Remove(old);
@@ -83,7 +82,7 @@
 
                 transaction.Commit();
 
-                return new(Message.Successful);
+                return new(Message.OperationSuccessful);
             }
             catch(Exception ex)
             {
