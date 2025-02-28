@@ -53,8 +53,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.base tr td:last-child
-{
+.base td{
   vertical-align: top;
 }
 .base tr td:first-child{

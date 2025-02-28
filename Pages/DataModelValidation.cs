@@ -5,7 +5,7 @@ namespace Benutzerverwaltungssoftware.Pages;
 
 internal static class DataModelValidation
 {
-    internal static string DecimalChars = "0123456789,.";
+    internal static string DecimalChars = "0123456789,.-+";
     internal static string FormulaChars = "W0123456789+-*/()";
     internal static string IntegerChars = "0123456789";
     internal static string DateFormat = "yyyy-MM-dd .,-/";
@@ -17,13 +17,15 @@ internal static class DataModelValidation
         if(value is null || value.Length == 0) return false;
         bool separator = false;
         int decimalplaces = 0;
-        foreach(var c in value) 
+        for(int i = 0; i < value.Length; i++) 
         {
-            var isn = IsNumber(c);
-            var iss = IsSeparator(c);
-            if(!isn && !iss) return false;
-            if(iss) { if(!separator) separator = true; else return false; }
-            if(isn) { if(separator) { if(decimalplaces < 2) decimalplaces++; else return false; } }
+            var isnmb = IsNumber(value[i]);
+            var isspr = IsSeparator(value[i]);
+            var issgn = IsSign(value[i]);
+            if(!isnmb && !isspr && !issgn) return false;
+            if(issgn && i > 0) return false; 
+            if(isspr) { if(!separator) separator = true; else return false; }
+            if(isnmb) { if(separator) { if(decimalplaces < 2) decimalplaces++; else return false; } }
         }
         return true;
     }
@@ -66,14 +68,15 @@ internal static class DataModelValidation
         string result = "";
         bool separator = false;
         int decimalplaces = 0;
-        foreach(var c in value)
+        for(int i = 0; i < value.Length; i++)
         {
-            if(IsNumber(c)) if((separator && decimalplaces < 2) || !separator) {result += c; decimalplaces += separator ? 1 : 0;}
-            if(IsSeparator(c)) if(!separator) {result += '.'; separator = true;}
+            if(IsNumber(value[i])) if((separator && decimalplaces < 2) || !separator) {result += value[i]; decimalplaces += separator ? 1 : 0;}
+            if(IsSeparator(value[i]) && !separator) {result += '.'; separator = true;}
+            if(IsSign(value[i]) && i == 0) result += value[i];
         }
-        return decimal.Parse(result, NumberStyles.AllowDecimalPoint, new CultureInfo("en-US"));
+        return decimal.Parse(result, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, new CultureInfo("en-US"));
     }
-    internal static DateTime StringToDate(string value)
+    internal static DateOnly StringToDate(string value)
     {
         string result = "";
         foreach(var c in value)
@@ -81,13 +84,14 @@ internal static class DataModelValidation
             if(DateLengthNumber(result.Length) && IsNumber(c)) result += c;
             if(DateLengthSeparator(result.Length) && IsDateSeparator(c)) result += '-';
         }
-        return DateTime.ParseExact(result, "yyyy-MM-dd", null);
+        return DateOnly.ParseExact(result, "yyyy-MM-dd", null);
     }
-    internal static string DateToString(DateTime date)
+    internal static string DateToString(DateOnly date)
     {
         return $"{date.Year}-{date.Month}-{date.Day}";
     }
 
+    private static bool IsSign(char c) => c == '-' || c == '+';
     private static bool IsNumber(char c) => c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9';
     private static bool IsSeparator(char c) => c == '.' || c == ',';
     private static bool IsFormulaSign(char c) => c == 'W' || c == '+' || c == '*' || c == '/' || c == '-' || c == '(' || c == ')';

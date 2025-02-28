@@ -1,6 +1,12 @@
 @page
 @model Benutzerverwaltungssoftware.Pages.Management.ManagementModel
 
+@{
+    var rdc = Global.Session is not null && Global.Session.User is not null && Information.CustomerID is not null && Information.CustomerID > 0 ?
+        Global.Session.User.GetCustomer((int)Information.CustomerID) : null;
+    var customer = rdc is not null && rdc.Message.Success && rdc.ReturnValue is not null ? rdc.ReturnValue : null;
+}
+
 <div class="base">
     <table class="base">
         <tr>
@@ -14,12 +20,13 @@
                             <tr><td><input class="select-top" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
                             <tr><td><input class="select-top" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
 
-                            @if(Information.CustomerID is not null && Information.CustomerID > 0)
+                            @if(customer is not null)
                             {
-                                <tr><td></td></tr>
+                                <tr><td><p style="vertical-align: middle; background-color: brown;">Kunde:<br>@customer.GivenName @customer.Surname</p></td></tr>
                                 <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
                                 <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
                                 <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
+                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
                             }
                         </table>
                     </form>
@@ -35,6 +42,8 @@
                         <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
                         case Management.Partial.CustomerInvoiceItem:
                         <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
+                        case Management.Partial.CustomerBooking:
+                        <partial name="/Pages/Management/_CustomerBooking.cshtml" for="@Model.CDM"/> break;
                         case Management.Partial.CustomerList:
                         <partial name="/Pages/Management/_CustomerList.cshtml"/> break;
                         case Management.Partial.InvoiceItem:

@@ -2,19 +2,22 @@
 
 @{
     var rd = Global.Session is not null && Global.Session.User is not null && Information.CustomerID > 0 ? Global.Session?.User?.GetCustomer((int)Information.CustomerID) : null;
-    if(rd is not null) Information.Message = rd.Message;
+    if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;
+    var customer = rd is not null && rd.Message.Success && rd.ReturnValue is not null ? rd.ReturnValue : null;
+    var birthday = customer is not null && customer.Birthday is not null ? DataModelValidation.DateToString((DateOnly)customer.Birthday) : "";
+    var joindate = customer is not null && customer.JoinDate is not null ? DataModelValidation.DateToString((DateOnly)customer.JoinDate) : "";
 }
 
-@if(Account.Information.Message is not null)
+@if(Information.Message is not null)
 {
     <div class="status">
-        @if(Account.Information.Message.Success)
+        @if(Information.Message.Success)
         {
-            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
         }
         else
         {
-            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
         }
     </div>
 }
@@ -22,17 +25,12 @@
 <form method="post">
     <table class="data">
         <thead>
-            @if(rd is not null && rd.Message.Success && rd.ReturnValue is not null)
+            @if(customer is not null)
             {
                 <tr>
                     <th style="width: 20%;"></th>
                     <th style="width: 70%;">Kundendaten verwalten</th>
                     <th style="width: 10%;"></th>
-                </tr>
-                <tr>
-                    <th>Betrag buchen</th>
-                    <th><input type="text" placeholder="Zeichen: @DataModelValidation.DecimalChars" asp-for="@Model.Book"/></th>
-                    <th><input class="nav" type="submit" asp-page-handler="BookCustomer" value="Buchen"/></th>
                 </tr>
             }
             else if(Information.CustomerID == 0)
@@ -45,34 +43,31 @@
             }
         </thead>
         <tbody>
-            @if(rd is not null && rd.Message.Success && rd.ReturnValue is not null)
+            @if(customer is not null)
             {
-                var user = rd.ReturnValue;
-                var birthday = user.Birthday is not null ? DataModelValidation.DateToString((DateTime)user.Birthday) : "";
-                var joindate = user.JoinDate is not null ? DataModelValidation.DateToString((DateTime)user.JoinDate) : "";
                 <tr>
                     <td>Vorname</td>
-                    <td><input type="text" value="@user.GivenName" asp-for="@Model.GivenName"/></td><td></td>
+                    <td><input type="text" value="@customer.GivenName" asp-for="@Model.GivenName"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Nachname</td>
-                    <td><input type="text" value="@user.Surname" asp-for="@Model.Surname"/></td><td></td>
+                    <td><input type="text" value="@customer.Surname" asp-for="@Model.Surname"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Strasse</td>
-                    <td><input type="text" value="@user.Street" asp-for="@Model.Street"/></td><td></td>
+                    <td><input type="text" value="@customer.Street" asp-for="@Model.Street"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Strassennummer</td>
-                    <td><input type="text" value="@user.StreetNumer" asp-for="@Model.StreetNumber"/></td><td></td>
+                    <td><input type="text" value="@customer.StreetNumer" asp-for="@Model.StreetNumber"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Postleitzahl</td>
-                    <td><input type="text" value="@user.PostalCode" asp-for="@Model.PostalCode"/></td><td></td>
+                    <td><input type="text" value="@customer.PostalCode" asp-for="@Model.PostalCode"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Stadt</td>
-                    <td><input type="text" value="@user.City" asp-for="@Model.City"/></td><td></td>
+                    <td><input type="text" value="@customer.City" asp-for="@Model.City"/></td><td></td>
                 </tr>
                 <tr>
                     <td>Geburtstag</td>

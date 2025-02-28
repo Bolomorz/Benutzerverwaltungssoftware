@@ -1,3 +1,5 @@
+@model CustomerModel
+
 @{
     var rd = Global.Session is not null && Global.Session.User is not null && Information.CustomerID > 0 ? Global.Session?.User?.GetCustomer((int)Information.CustomerID) : null;
     if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;

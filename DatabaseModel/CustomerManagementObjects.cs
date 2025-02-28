@@ -22,12 +22,13 @@ public class Customer
     public string? StreetNumer { get; set; }
     public string? PostalCode { get; set; }
     public string? City { get; set; }
-    public DateTime? Birthday { get; set; }
-    public DateTime? JoinDate { get; set; }
+    public DateOnly? Birthday { get; set; }
+    public DateOnly? JoinDate { get; set; }
     public decimal? PaidAmount { get; set; }
 
     public List<CustomerInvoiceItem> CustomerInvoiceItems { get; set; } = new();
     public List<CustomerFile> CustomerFiles { get; set;} = new();
+    public List<CustomerBooking> CustomerBookings { get; set; } = new();
 }
 
 public class InvoiceItem
@@ -59,6 +60,17 @@ public class CustomerFile
     [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int CustomerFileID { get; set; }
     public string? FileName { get; set; }
     public byte[]? Data { get; set; }
+    public DateTime? Time { get; set; }
+
+    [ForeignKey("Customer")] public int CustomerID { get; set; }
+    public Customer? Customer { get; set; }
+}
+
+public class CustomerBooking
+{
+    [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int CustomerBookingID { get; set; }
+    public string? Description { get; set; }
+    public decimal? BookingAmount { get; set; }
     public DateTime? Time { get; set; }
 
     [ForeignKey("Customer")] public int CustomerID { get; set; }

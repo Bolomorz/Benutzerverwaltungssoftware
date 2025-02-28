@@ -13,9 +13,11 @@ public class CustomerModel
     public required string Birthday { get; set; }
     public required string JoinDate { get; set; }
     public required string Book { get; set; }
+    public required string BookingDescription { get; set; }
 
     public ReturnDialog ValidateBooking()
     {
+        if(!DataModelValidation.ValidateString(BookingDescription)) return new(new(MID.FailedValidation, false, $"Geben Sie eine Beschreibung ein."));
         if(!DataModelValidation.ValidateDecimal(Book)) return new(new(MID.FailedValidation, false, $"Geben Sie einen korrekten Buchungswert ein. Zeichen: {DataModelValidation.DecimalChars}"));
         return new(Message.ValidationSucccessful);
     }

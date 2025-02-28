@@ -1,3 +1,4 @@
+using Benutzerverwaltungssoftware.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,7 +21,8 @@ public class ManagementModel : PageModel
             City = "",
             Birthday = "",
             JoinDate = "",
-            Book = ""
+            Book = "",
+            BookingDescription = ""
         };
         IIDM = new()
         {
@@ -62,7 +64,12 @@ public class ManagementModel : PageModel
         Information.Partial = Management.Partial.CustomerInvoiceItem;
         return Page();
     }
-    
+    public IActionResult OnPostSelectCustomerBooking()
+    {
+        Information.Partial = Management.Partial.CustomerBooking;
+        return Page();
+    }
+
     public IActionResult OnPostNewCustomer()
     {
         Information.CustomerID = 0;
@@ -100,13 +107,14 @@ public class ManagementModel : PageModel
         var rdv = CDM.ValidateBooking();
         if(!rdv.Message.Success)
         {
+            Console.WriteLine(rdv.Message.Error);
             Information.Message = rdv.Message;
             return Page();
         }
 
         if(Information.CustomerID is null || Information.CustomerID == 0) return Page();
 
-        var rdb = Global.Session.User.BookCustomer(DataModelValidation.StringToDecimal(CDM.Book), (int)Information.CustomerID);
+        var rdb = Global.Session.User.BookCustomer(DataModelValidation.StringToDecimal(CDM.Book), CDM.BookingDescription, (int)Information.CustomerID);
         Information.Message = rdb.Message;
 
         Information.Partial = Information.Message.Success ? Management.Partial.CustomerList : Management.Partial.CustomerData;

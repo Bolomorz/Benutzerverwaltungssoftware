@@ -1,24 +1,33 @@
-@if(Account.Information.Message is not null)
+@{
+    var rd = Global.Session is not null && Global.Session.User is not null && Information.CustomerID > 0 ? Global.Session?.User?.GetCustomer((int)Information.CustomerID) : null;
+    if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;
+    var customer = rd is not null && rd.Message.Success && rd.ReturnValue is not null ? rd.ReturnValue : null;
+}
+
+@if(Information.Message is not null)
 {
     <div class="status">
-        @if(Account.Information.Message.Success)
+        @if(Information.Message.Success)
         {
-            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
         }
         else
         {
-            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
         }
     </div>
 }
 
 <form method="post">
     <table class="data">
-        <thead>
+        @if(customer is not null)
+        {
+            <thead>
+                
+            </thead>
+            <tbody>
 
-        </thead>
-        <tbody>
-
-        </tbody>
+            </tbody>
+        }
     </table>
 </form>

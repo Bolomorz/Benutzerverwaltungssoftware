@@ -354,7 +354,7 @@ internal static class UserManagementPacker
             }
         }
         /// <summary>
-        /// Customer.CustomerFiles | Customer.CustomerInvoiceItems.InvoiceItem
+        /// Customer.CustomerFiles | Customer.CustomerInvoiceItems.InvoiceItem | Customer.CustomerBookings
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
@@ -364,11 +364,12 @@ internal static class UserManagementPacker
             {
                 using var cmc = new CustomerManagementContext(Global.Year);
 
-                if(cmc.Customers is null || cmc.CustomerInvoiceItems is null || cmc.InvoiceItems is null || cmc.CustomerFiles is null) 
+                if(cmc.Customers is null || cmc.CustomerInvoiceItems is null || cmc.InvoiceItems is null || cmc.CustomerFiles is null || cmc.CustomerBookings is null) 
                     return new(Message.ConnectionFailed, null);
 
                 var customer = cmc.Customers
                 .Include(x => x.CustomerFiles)
+                .Include(x => x.CustomerBookings)
                 .Include(x => x.CustomerInvoiceItems).ThenInclude(x => x.InvoiceItem)
                 .FirstOrDefault(x => x.CustomerID == customerID);
 
@@ -380,7 +381,7 @@ internal static class UserManagementPacker
             }
         }
         internal static ReturnDialog Save(string givenname, string surname, string street, string streetnumber, string postalcode, string city,
-            DateTime birthday, DateTime joindate, int? customerID)
+            DateOnly birthday, DateOnly joindate, int? customerID)
         {
             using var cmc = new CustomerManagementContext(Global.Year);
             using var transaction = cmc.Database.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
@@ -445,20 +446,28 @@ internal static class UserManagementPacker
                 return new(new(MID.ErrorThrown, false, $"error in Customer.Save: {ex}"));
             }
         }
-        internal static ReturnDialog Book(decimal amount, int customerID)
+        internal static ReturnDialog Book(decimal amount, string description, int customerID)
         {
             using var cmc = new CustomerManagementContext(Global.Year);
             using var transaction = cmc.Database.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
 
             try
             {
-                if(cmc.Customers is null) { transaction.Rollback(); return new(Message.ConnectionFailed); }
+                if(cmc.Customers is null || cmc.CustomerBookings is null) { transaction.Rollback(); return new(Message.ConnectionFailed); }
 
                 var customer = cmc.Customers.FirstOrDefault(x => x.CustomerID == customerID);
 
                 if(customer is null) { transaction.Rollback(); return new(new(MID.NotFound, false, $"Kunde mit ID {customerID} wurde nicht gefunden"));}
 
                 customer.PaidAmount = customer.PaidAmount is not null ? customer.PaidAmount + amount : amount;
+
+                cmc.CustomerBookings.Add(new()
+                {
+                    CustomerID = customerID,
+                    Description = description,
+                    BookingAmount = amount,
+                    Time = DateTime.Now
+                });
 
                 cmc.SaveChanges();
 

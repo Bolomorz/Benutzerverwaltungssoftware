@@ -1,23 +1,24 @@
 @{
     var rd = Global.Session is not null && Global.Session.User is not null ?  Global.Session.User.GetCustomers() : null;
-    if(rd is not null) Information.Message = rd.Message;
+    if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;
+    var customers = rd is not null && rd.ReturnValue is not null ? rd.ReturnValue : null;
 }
 
-@if(Account.Information.Message is not null)
+@if(Information.Message is not null)
 {
     <div class="status">
-        @if(Account.Information.Message.Success)
+        @if(Information.Message.Success)
         {
-            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
         }
         else
         {
-            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
         }
     </div>
 }
 
-@if(rd is not null && rd.Message.Success && rd.ReturnValue is not null)
+@if(customers is not null)
 {       
     <form method="post">
         <table class="data">
@@ -31,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var customer in rd.ReturnValue)
+                @foreach(var customer in customers)
                 {
                     <tr>
                         <td>@customer.GivenName @customer.Surname</td>

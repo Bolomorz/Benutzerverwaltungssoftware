@@ -10,4 +10,4 @@ internal static class Information
     internal static Partial Partial { get; set; } = Partial.CustomerList;
 }
 
-internal enum Partial { CustomerData, CustomerFile, CustomerInvoiceItem, CustomerList, InvoiceItem, InvoiceItemList}
+internal enum Partial { CustomerData, CustomerFile, CustomerInvoiceItem, CustomerBooking, CustomerList, InvoiceItem, InvoiceItemList}

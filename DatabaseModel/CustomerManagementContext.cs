@@ -13,6 +13,7 @@ public class CustomerManagementContext : DbContext
     public DbSet<InvoiceItem>? InvoiceItems { get; set; }
     public DbSet<CustomerInvoiceItem>? CustomerInvoiceItems { get; set; }
     public DbSet<CustomerFile>? CustomerFiles { get; set; }
+    public DbSet<CustomerBooking>? CustomerBookings { get; set; }
     #endregion
 
     #region DBSET Logs

@@ -122,7 +122,7 @@ internal class AuthenticatedUser
         return rd;
     }
     /// <summary>
-    /// Customer.CustomerFiles | Customer.CustomerInvoiceItems.InvoiceItem
+    /// Customer.CustomerFiles | Customer.CustomerInvoiceItems.InvoiceItem | Customer.CustomerBookings
     /// </summary>
     /// <param name="customerID"></param>
     /// <returns></returns>
@@ -137,7 +137,7 @@ internal class AuthenticatedUser
         return rd;
     }
     internal ReturnDialog SaveCustomer(string givenname, string surname, string street, string streetnumber, string postalcode, string city,
-        DateTime birthday, DateTime joindate, int? customerID)
+        DateOnly birthday, DateOnly joindate, int? customerID)
     {
         var rd = UserManagementPacker.Customer.Save(givenname, surname, street, streetnumber, postalcode, city, birthday, joindate, customerID);
         if(!rd.Message.Success) 
@@ -147,9 +147,9 @@ internal class AuthenticatedUser
         }
         return rd;
     }
-    internal ReturnDialog BookCustomer(decimal amount, int customerID)
+    internal ReturnDialog BookCustomer(decimal amount, string description, int customerID)
     {
-        var rd = UserManagementPacker.Customer.Book(amount, customerID);
+        var rd = UserManagementPacker.Customer.Book(amount, description, customerID);
         if(!rd.Message.Success) 
         {
             var wl = UserManagementPacker.Logs.WriteLog("BookCustomer", rd.Message.Error, ObjectType.C, customerID);

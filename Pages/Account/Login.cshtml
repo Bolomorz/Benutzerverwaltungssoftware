@@ -2,6 +2,21 @@
 @model Benutzerverwaltungssoftware.Pages.Account.LoginModel
 
 <div class="base">
+    <div class="status">
+        <h4>Status</h4>
+        @if(Account.Information.Message is not null)
+        {
+            if(Account.Information.Message.Success)
+            {
+                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+            }
+            else
+            {
+                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+            }
+        }
+    </div>
+
     <div class="login">
         <form method="post">
             <table class="login">
@@ -18,20 +33,5 @@
                 </tr>
             </table>
         </form>
-    </div>
-
-    <div class="status">
-        <h4>Status</h4>
-        @if(Account.Information.Message is not null)
-        {
-            if(Account.Information.Message.Success)
-            {
-                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
-            }
-            else
-            {
-                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
-            }
-        }
     </div>
 </div>
