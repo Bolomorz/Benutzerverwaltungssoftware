@@ -1,8 +1,12 @@
 @page
 @model Benutzerverwaltungssoftware.Pages.Account.LoginModel
 
-<div class="base">
-    <div class="status">
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
+<div class="base-red">
+    <div class="status-red">
         <h4>Status</h4>
         @if(Account.Information.Message is not null)
         {
@@ -17,9 +21,9 @@
         }
     </div>
 
-    <div class="login">
+    <div class="login-red">
         <form method="post">
-            <table class="login">
+            <table class="login-red">
                 <tr>
                     <td>Username</td>
                     <td><input type="text" asp-for="@Model.LDM.Username"/></td>
@@ -29,9 +33,51 @@
                     <td><input type="password" asp-for="@Model.LDM.Password"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input class="nav" type="submit" value="Login" asp-page-handler="Login"/></td>
+                    <td colspan="2"><input class="nav-red" type="submit" value="Login" asp-page-handler="Login"/></td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
+
+    break;
+
+    case ColorMode.Blue:
+
+<div class="base-blue">
+    <div class="status-blue">
+        <h4>Status</h4>
+        @if(Account.Information.Message is not null)
+        {
+            if(Account.Information.Message.Success)
+            {
+                <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Account.Information.Message.Error</p>
+            }
+            else
+            {
+                <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Account.Information.Message.Error</p>
+            }
+        }
+    </div>
+
+    <div class="login-blue">
+        <form method="post">
+            <table class="login-blue">
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" asp-for="@Model.LDM.Username"/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" asp-for="@Model.LDM.Password"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input class="nav-blue" type="submit" value="Login" asp-page-handler="Login"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+    break;
+}

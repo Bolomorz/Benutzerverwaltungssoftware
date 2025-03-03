@@ -7,33 +7,37 @@
     var customer = rdc is not null && rdc.Message.Success && rdc.ReturnValue is not null ? rdc.ReturnValue : null;
 }
 
-<div class="base">
-    <table class="base">
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
+<div class="base-red">
+    <table class="base-red">
         <tr>
             <td>
-                <div class="select">
+                <div class="select-red">
                     <form method="post">
-                        <table class="select">
-                            <tr><td><input class="select-top" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td></tr>
-                            <tr><td><input class="select-top" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td></tr>
+                        <table class="select-red">
+                            <tr><td><input class="select-top-red" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td></tr>
+                            <tr><td><input class="select-top-red" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td></tr>
                             <tr><td></td></tr>
-                            <tr><td><input class="select-top" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
-                            <tr><td><input class="select-top" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
+                            <tr><td><input class="select-top-red" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
+                            <tr><td><input class="select-top-red" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
 
                             @if(customer is not null)
                             {
                                 <tr><td><p style="vertical-align: middle; background-color: brown;">Kunde:<br>@customer.GivenName @customer.Surname</p></td></tr>
-                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
-                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
-                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
-                                <tr><td><input class="select-lower" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
                             }
                         </table>
                     </form>
                 </div>
             </td>
             <td>
-                <div class="data">
+                <div class="data-red">
                     @switch(Information.Partial)
                     {
                         case Management.Partial.CustomerData: 
@@ -56,3 +60,60 @@
         </tr>
     </table>
 </div>
+
+    break;
+
+    case ColorMode.Blue:
+
+<div class="base-blue">
+    <table class="base-blue">
+        <tr>
+            <td>
+                <div class="select-blue">
+                    <form method="post">
+                        <table class="select-blue">
+                            <tr><td><input class="select-top-blue" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td></tr>
+                            <tr><td><input class="select-top-blue" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td><input class="select-top-blue" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
+                            <tr><td><input class="select-top-blue" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
+
+                            @if(customer is not null)
+                            {
+                                <tr><td><p style="vertical-align: middle; background-color: rgb(148, 14, 236);">Kunde:<br>@customer.GivenName @customer.Surname</p></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
+                            }
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="data-blue">
+                    @switch(Information.Partial)
+                    {
+                        case Management.Partial.CustomerData: 
+                        <partial name="/Pages/Management/_CustomerData.cshtml" for="@Model.CDM"/> break;
+                        case Management.Partial.CustomerFile:
+                        <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
+                        case Management.Partial.CustomerInvoiceItem:
+                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
+                        case Management.Partial.CustomerBooking:
+                        <partial name="/Pages/Management/_CustomerBooking.cshtml" for="@Model.CDM"/> break;
+                        case Management.Partial.CustomerList:
+                        <partial name="/Pages/Management/_CustomerList.cshtml"/> break;
+                        case Management.Partial.InvoiceItem:
+                        <partial name="/Pages/Management/_InvoiceItem.cshtml" for="@Model.IIDM"/> break;
+                        case Management.Partial.InvoiceItemList:
+                        <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+    break;
+}

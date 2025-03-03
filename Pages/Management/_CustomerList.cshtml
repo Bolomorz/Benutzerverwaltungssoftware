@@ -4,9 +4,13 @@
     var customers = rd is not null && rd.ReturnValue is not null ? rd.ReturnValue : null;
 }
 
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
 @if(Information.Message is not null)
 {
-    <div class="status">
+    <div class="status-red">
         @if(Information.Message.Success)
         {
             <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
@@ -21,7 +25,7 @@
 @if(customers is not null)
 {       
     <form method="post">
-        <table class="data">
+        <table class="data-red">
             <thead>
                 <tr>
                     <th style="width: 40%;">Name</th>
@@ -38,11 +42,61 @@
                         <td>@customer.GivenName @customer.Surname</td>
                         <td>@customer.PaidAmount</td>
                         <td>@Data.CalculateData.MissingAmount(customer)</td>
-                        <td><input class="nav" type="submit" asp-page-handler="PickCustomer" asp-route-id="@customer.CustomerID" value="Bearbeiten"/></td>
-                        <td><input class="del" type="submit" asp-page-handler="DeleteCustomer" asp-route-id="@customer.CustomerID" value="Löschen"/></td>
+                        <td><input class="nav-red" type="submit" asp-page-handler="PickCustomer" asp-route-id="@customer.CustomerID" value="Bearbeiten"/></td>
+                        <td><input class="del-red" type="submit" asp-page-handler="DeleteCustomer" asp-route-id="@customer.CustomerID" value="Löschen"/></td>
                     </tr>
                 }
             </tbody>
         </table>
     </form>
+}
+
+    break;
+
+    case ColorMode.Blue:
+
+@if(Information.Message is not null)
+{
+    <div class="status-blue">
+        @if(Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+        }
+    </div>
+}
+
+@if(customers is not null)
+{       
+    <form method="post">
+        <table class="data-blue">
+            <thead>
+                <tr>
+                    <th style="width: 40%;">Name</th>
+                    <th style="width: 20%;">Bezahlter Betrag</th>
+                    <th style="width: 20%;">Fehlender Betrag</th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var customer in customers)
+                {
+                    <tr>
+                        <td>@customer.GivenName @customer.Surname</td>
+                        <td>@customer.PaidAmount</td>
+                        <td>@Data.CalculateData.MissingAmount(customer)</td>
+                        <td><input class="nav-blue" type="submit" asp-page-handler="PickCustomer" asp-route-id="@customer.CustomerID" value="Bearbeiten"/></td>
+                        <td><input class="del-blue" type="submit" asp-page-handler="DeleteCustomer" asp-route-id="@customer.CustomerID" value="Löschen"/></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+}
+
+    break;
 }

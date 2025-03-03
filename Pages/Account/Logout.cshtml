@@ -1,6 +1,21 @@
 @page
 @model Benutzerverwaltungssoftware.Pages.Account.LogoutModel
 
-<div class="base">
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
+<div class="base-red">
     <h4>wird ausgeloggt</h4>
 </div>
+
+    break;
+
+    case ColorMode.Blue:
+
+<div class="base-blue">
+    <h4>wird ausgeloggt</h4>
+</div>
+
+    break;
+}

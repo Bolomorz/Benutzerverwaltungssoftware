@@ -6,9 +6,13 @@
     var invoiceitem = rd is not null && rd.Message.Success && rd.ReturnValue is not null ? rd.ReturnValue : null;
 }
 
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
 @if(Information.Message is not null)
 {
-    <div class="status">
+    <div class="status-red">
         @if(Information.Message.Success)
         {
             <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
@@ -21,7 +25,7 @@
 }
 
 <form method="post">
-    <table class="data">
+    <table class="data-red">
         @if(invoiceitem is not null)
         {
             <thead>
@@ -49,7 +53,7 @@
                     <td><input type="text" value="@invoiceitem.TransformFormula" asp-for="@Model.TransformFormula"/></td><td></td>
                 </tr>
                 <tr>
-                    <td></td><td><input class="nav" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
+                    <td></td><td><input class="nav-red" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
                 </tr>
             </tbody>
         }
@@ -80,9 +84,97 @@
                     <td><input type="text" value="W" asp-for="@Model.TransformFormula"/></td><td></td>
                 </tr>
                 <tr>
-                    <td></td><td><input class="nav" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
+                    <td></td><td><input class="nav-red" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
                 </tr>
             </tbody>
         }
     </table>
 </form>
+
+    break;
+
+    case ColorMode.Blue:
+
+@if(Information.Message is not null)
+{
+    <div class="status-blue">
+        @if(Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <table class="data-blue">
+        @if(invoiceitem is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;"></th>
+                    <th style="width: 70%;">Rechnungspostendaten verwalten</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" value="@invoiceitem.Name" asp-for="@Model.Name"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Beschreibung</td>
+                    <td><input type="text" value="@invoiceitem.Description" asp-for="@Model.Description"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Standardwert</td>
+                    <td><input type="text" value="@invoiceitem.DefaultValue" asp-for="@Model.DefaultValue"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Formel</td>
+                    <td><input type="text" value="@invoiceitem.TransformFormula" asp-for="@Model.TransformFormula"/></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td><input class="nav-blue" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
+                </tr>
+            </tbody>
+        }
+        else if(Information.InvoiceItemID == 0)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;"></th>
+                    <th style="width: 70%;">Neuen Rechnungsposten anlegen</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" asp-for="@Model.Name"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Beschreibung</td>
+                    <td><input type="text" asp-for="@Model.Description"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Standardwert</td>
+                    <td><input type="text" placeholder="Zeichen: @DataModelValidation.DecimalChars" asp-for="@Model.DefaultValue"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Formel</td>
+                    <td><input type="text" value="W" asp-for="@Model.TransformFormula"/></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td><input class="nav-blue" type="submit" asp-page-handler="SaveInvoiceItem" value="Speichern"/></td><td></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</form>
+
+    break;
+}

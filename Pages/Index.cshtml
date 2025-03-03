@@ -4,6 +4,17 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="base">
-    <h1 class="display-4">Willkommen</h1>
-</div>
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+        <div class="base-red">
+            <h1 class="display-4">Willkommen</h1>
+        </div>
+    break;
+
+    case ColorMode.Blue:
+        <div class="base-blue">
+            <h1 class="display-4">Willkommen</h1>
+        </div>
+    break;
+}

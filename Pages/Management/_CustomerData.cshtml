@@ -8,9 +8,13 @@
     var joindate = customer is not null && customer.JoinDate is not null ? DataModelValidation.DateToString((DateOnly)customer.JoinDate) : "";
 }
 
+@switch(Global.ColorMode)
+{
+    case ColorMode.Red:
+
 @if(Information.Message is not null)
 {
-    <div class="status">
+    <div class="status-red">
         @if(Information.Message.Success)
         {
             <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
@@ -23,7 +27,7 @@
 }
 
 <form method="post">
-    <table class="data">
+    <table class="data-red">
         <thead>
             @if(customer is not null)
             {
@@ -114,8 +118,127 @@
                 </tr>
             }
             <tr>
-                <td></td><td><input class="nav" type="submit" asp-page-handler="SaveCustomer" value="Speichern"/></td><td></td>
+                <td></td><td><input class="nav-red" type="submit" asp-page-handler="SaveCustomer" value="Speichern"/></td><td></td>
             </tr>
         </tbody>
     </table>
 </form>
+
+    break;
+
+    case ColorMode.Blue:
+
+@if(Information.Message is not null)
+{
+    <div class="status-blue">
+        @if(Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <table class="data-blue">
+        <thead>
+            @if(customer is not null)
+            {
+                <tr>
+                    <th style="width: 20%;"></th>
+                    <th style="width: 70%;">Kundendaten verwalten</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            }
+            else if(Information.CustomerID == 0)
+            {
+                <tr>
+                    <th style="width: 20%;"></th>
+                    <th style="width: 70%;">Neuen Kunden anlegen</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            }
+        </thead>
+        <tbody>
+            @if(customer is not null)
+            {
+                <tr>
+                    <td>Vorname</td>
+                    <td><input type="text" value="@customer.GivenName" asp-for="@Model.GivenName"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Nachname</td>
+                    <td><input type="text" value="@customer.Surname" asp-for="@Model.Surname"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Strasse</td>
+                    <td><input type="text" value="@customer.Street" asp-for="@Model.Street"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Strassennummer</td>
+                    <td><input type="text" value="@customer.StreetNumer" asp-for="@Model.StreetNumber"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Postleitzahl</td>
+                    <td><input type="text" value="@customer.PostalCode" asp-for="@Model.PostalCode"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Stadt</td>
+                    <td><input type="text" value="@customer.City" asp-for="@Model.City"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Geburtstag</td>
+                    <td><input type="text" value="@birthday" asp-for="@Model.Birthday"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Eintrittsdatum</td>
+                    <td><input type="text" value="@joindate" asp-for="@Model.JoinDate"/></td><td></td>
+                </tr>
+            }
+            else if(Information.CustomerID == 0)
+            {
+                <tr>
+                    <td>Vorname</td>
+                    <td><input type="text" asp-for="@Model.GivenName"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Nachname</td>
+                    <td><input type="text" asp-for="@Model.Surname"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Strasse</td>
+                    <td><input type="text" asp-for="@Model.Street"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Strassennummer</td>
+                    <td><input type="text" placeholder="Zeichen: @DataModelValidation.IntegerChars" asp-for="@Model.StreetNumber"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Postleitzahl</td>
+                    <td><input type="text" placeholder="Format: @DataModelValidation.PostalCodeFormat" asp-for="@Model.PostalCode"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Stadt</td>
+                    <td><input type="text" asp-for="@Model.City"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Geburtstag</td>
+                    <td><input type="text" placeholder="Format: @DataModelValidation.DateFormat" asp-for="@Model.Birthday"/></td><td></td>
+                </tr>
+                <tr>
+                    <td>Eintrittsdatum</td>
+                    <td><input type="text" placeholder="Format: @DataModelValidation.DateFormat" asp-for="@Model.JoinDate"/></td><td></td>
+                </tr>
+            }
+            <tr>
+                <td></td><td><input class="nav-blue" type="submit" asp-page-handler="SaveCustomer" value="Speichern"/></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+    break;
+}
