@@ -29,10 +29,50 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 20%;">Betrag buchen</th>
+                    <th style="width: 80%;"><input type="text" placeholder="@DataModelValidation.DecimalChars" asp-for="@Model.Book"/></th>
+                </tr>
+                <tr>
+                    <th>Beschreibung</th>
+                    <th><input type="text" asp-for="@Model.BookingDescription"/></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="nav-red" type="submit" asp-page-handler="BookCustomer" value="Buchen"/></th>
+                </tr>
+            </thead>
+        }
+    </table>
+    <table class="data-red">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Buchungszeitpunkt</th>
+                    <th style="width: 60%;">Beschreibung</th>
+                    <th style="width: 10%;">Buchung</th>
+                    <th style="width: 10%;">Endwert</th>
+                </tr>
             </thead>
             <tbody>
-
+                @{decimal total = 0;}
+                @foreach(var booking in customer.CustomerBookings)
+                {
+                    total += booking.BookingAmount is not null ? (decimal)booking.BookingAmount : 0;
+                    <tr>
+                        <td>@booking.Time</td>
+                        <td>@booking.Description</td>
+                        <td>@booking.BookingAmount @Global.CurrencySign</td>
+                        <td>@total @Global.CurrencySign</td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td>Bezahlter Betrag: </td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td></td>
+                </tr>
             </tbody>
         }
     </table>
@@ -61,10 +101,50 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 20%;">Betrag buchen</th>
+                    <th style="width: 80%;"><input type="text" placeholder="@DataModelValidation.DecimalChars" asp-for="@Model.Book"/></th>
+                </tr>
+                <tr>
+                    <th>Beschreibung</th>
+                    <th><input type="text" asp-for="@Model.BookingDescription"/></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="nav-blue" type="submit" asp-page-handler="BookCustomer" value="Buchen"/></th>
+                </tr>
+            </thead>
+        }
+    </table>
+    <table class="data-blue">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Buchungszeitpunkt</th>
+                    <th style="width: 60%;">Beschreibung</th>
+                    <th style="width: 10%;">Buchung</th>
+                    <th style="width: 10%;">Endwert</th>
+                </tr>
             </thead>
             <tbody>
-
+                @{decimal total = 0;}
+                @foreach(var booking in customer.CustomerBookings)
+                {
+                    total += booking.BookingAmount is not null ? (decimal)booking.BookingAmount : 0;
+                    <tr>
+                        <td>@booking.Time</td>
+                        <td>@booking.Description</td>
+                        <td>@booking.BookingAmount @Global.CurrencySign</td>
+                        <td>@total @Global.CurrencySign</td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td>Bezahlter Betrag: </td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td></td>
+                </tr>
             </tbody>
         }
     </table>

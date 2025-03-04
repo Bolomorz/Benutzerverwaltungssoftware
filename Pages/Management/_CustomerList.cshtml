@@ -40,8 +40,8 @@
                 {
                     <tr>
                         <td>@customer.GivenName @customer.Surname</td>
-                        <td>@customer.PaidAmount</td>
-                        <td>@Data.CalculateData.MissingAmount(customer)</td>
+                        <td>@customer.PaidAmount @Global.CurrencySign</td>
+                        <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
                         <td><input class="nav-red" type="submit" asp-page-handler="PickCustomer" asp-route-id="@customer.CustomerID" value="Bearbeiten"/></td>
                         <td><input class="del-red" type="submit" asp-page-handler="DeleteCustomer" asp-route-id="@customer.CustomerID" value="Löschen"/></td>
                     </tr>
@@ -87,8 +87,8 @@
                 {
                     <tr>
                         <td>@customer.GivenName @customer.Surname</td>
-                        <td>@customer.PaidAmount</td>
-                        <td>@Data.CalculateData.MissingAmount(customer)</td>
+                        <td>@customer.PaidAmount @Global.CurrencySign</td>
+                        <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
                         <td><input class="nav-blue" type="submit" asp-page-handler="PickCustomer" asp-route-id="@customer.CustomerID" value="Bearbeiten"/></td>
                         <td><input class="del-blue" type="submit" asp-page-handler="DeleteCustomer" asp-route-id="@customer.CustomerID" value="Löschen"/></td>
                     </tr>

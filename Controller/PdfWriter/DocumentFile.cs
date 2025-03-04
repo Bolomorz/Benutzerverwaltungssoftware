@@ -27,6 +27,12 @@ internal class PdfFile
             }
         }
     }
+
+    internal static void OpenDocument(byte[]? data)
+    {
+        var file = new PdfFile(){ Success = true, Data = data };
+        file.OpenDocument();
+    }
 }
 
 internal class DocumentItem

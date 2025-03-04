@@ -1,6 +1,8 @@
 using Benutzerverwaltungssoftware.Data;
+using Benutzerverwaltungssoftware.Pdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Benutzerverwaltungssoftware.Pages.Management;
 
@@ -117,7 +119,7 @@ public class ManagementModel : PageModel
         var rdb = Global.Session.User.BookCustomer(DataModelValidation.StringToDecimal(CDM.Book), CDM.BookingDescription, (int)Information.CustomerID);
         Information.Message = rdb.Message;
 
-        Information.Partial = Information.Message.Success ? Management.Partial.CustomerList : Management.Partial.CustomerData;
+        Information.Partial = Management.Partial.CustomerBooking;
 
         return Page();
     }
@@ -191,6 +193,35 @@ public class ManagementModel : PageModel
         Information.Message = rdd.Message;
 
         Information.Partial = Management.Partial.InvoiceItemList;
+
+        return Page();
+    }
+    public IActionResult OnPostDeleteCustomerFile(int? id)
+    {
+        if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
+
+        if(id is null || id < 1) return Page();
+
+        var rdd = Global.Session.User.DeleteCustomerFile((int)id);
+        Information.Message = rdd.Message;
+
+        Information.Partial = Management.Partial.CustomerFile;
+
+        return Page();
+    }
+
+    public IActionResult OnPostOpenFile(int? id)
+    {
+        if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
+
+        if(id is null || id < 1) return Page();
+
+        var rdo = Global.Session.User.GetCustomerFile((int)id);
+        Information.Message = rdo.Message;
+
+        if(rdo.ReturnValue is null) return Page();
+        
+        PdfFile.OpenDocument(rdo.ReturnValue.Data);
 
         return Page();
     }

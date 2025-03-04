@@ -7,6 +7,7 @@ internal static class Global
     internal static Session.Session? Session { get; private set; } = null;
     internal static int Year { get; set; } = DateTime.Now.Year;
     internal static ColorMode ColorMode { get; set; } = ColorMode.Blue;
+    internal static string CurrencySign { get; set; } = "€";
 
     internal static ReturnDialog OpenSession(string username, string plainpw)
     {

@@ -27,10 +27,23 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 20%;">Erstellung</th>
+                    <th style="width: 50%;">Datei</th>
+                    <th style="width: 15%;"></th>
+                    <th style="width: 15%;"></th>
+                </tr>
             </thead>
             <tbody>
-
+                @foreach(var file in customer.CustomerFiles)
+                {
+                    <tr>
+                        <td>@file.Time</td>
+                        <td>@file.FileName</td>
+                        <td><input class="nav-red" type="submit" asp-page-handler="OpenFile" asp-route-id="@file.CustomerFileID" value="Öffnen"/></td>
+                        <td><input class="del-red" type="submit" asp-page-handler="DeleteCustomerFile" asp-route-id="@file.CustomerFileID" value="Löschen"/></td>
+                    </tr>
+                }
             </tbody>
         }
     </table>
@@ -59,10 +72,23 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 20%;">Erstellung</th>
+                    <th style="width: 50%;">Datei</th>
+                    <th style="width: 15%;"></th>
+                    <th style="width: 15%;"></th>
+                </tr>
             </thead>
             <tbody>
-
+                @foreach(var file in customer.CustomerFiles)
+                {
+                    <tr>
+                        <td>@file.Time</td>
+                        <td>@file.FileName</td>
+                        <td><input class="nav-blue" type="submit" asp-page-handler="OpenFile" asp-route-id="@file.CustomerFileID" value="Öffnen"/></td>
+                        <td><input class="del-blue" type="submit" asp-page-handler="DeleteCustomerFile" asp-route-id="@file.CustomerFileID" value="Löschen"/></td>
+                    </tr>
+                }
             </tbody>
         }
     </table>

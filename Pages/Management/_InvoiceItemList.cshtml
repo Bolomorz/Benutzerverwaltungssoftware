@@ -40,8 +40,8 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td>@item.DefaultValue</td>
-                        <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems)</td>
+                        <td>@item.DefaultValue @Global.CurrencySign</td>
+                        <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems) @Global.CurrencySign</td>
                         <td><input class="nav-red" type="submit" asp-page-handler="PickInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Bearbeiten"/></td>
                         <td><input class="del-red" type="submit" asp-page-handler="DeleteInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Löschen"/></td>
                     </tr>
@@ -87,8 +87,8 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td>@item.DefaultValue</td>
-                        <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems)</td>
+                        <td>@item.DefaultValue @Global.CurrencySign</td>
+                        <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems) @Global.CurrencySign</td>
                         <td><input class="nav-blue" type="submit" asp-page-handler="PickInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Bearbeiten"/></td>
                         <td><input class="del-blue" type="submit" asp-page-handler="DeleteInvoiceItem" asp-route-id="@item.InvoiceItemID" value="Löschen"/></td>
                     </tr>
