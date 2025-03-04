@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Benutzerverwaltungssoftware.Data;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -27,6 +28,11 @@ internal class PdfFile
             }
         }
     }
+
+    internal ReturnDialog SaveDocument(string filename, int customerID, int? customerfileID)
+    => Data is not null && Global.Session is not null && Global.Session.User is not null ?
+        Global.Session.User.SaveCustomerFile(filename, Data, DateTime.Now, customerID, customerfileID) :
+        new(new(MID.NullValue, false, "Datei konnte nicht gespeichert werden"));
 
     internal static void OpenDocument(byte[]? data)
     {
