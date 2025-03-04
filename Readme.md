@@ -88,10 +88,10 @@ software for managing customers and printing invoices.
 2.8 Partials
 
 - the page {Management} has different partial with a static variable realized as an enum of the partials
-- the index page switches between the partial pages with the held of post-functions according to the stored value in the static variable
+- the index page switches between the partial pages with the help of post-functions according to the stored value in the static variable
 - to ensure saving of data between navigating of pages the nullable ids of the picked [Customer] and [InvoiceItem] are stored in a static variable
 - the partials then load data according to the stored values
-    /Pages/Management/...
+    - /Pages/Management/...
 
 2.9 Document Templates and Printing
 
@@ -103,4 +103,4 @@ software for managing customers and printing invoices.
 - strings use [FormatStrings] to dynamically insert data into the template 
 - a template can decide which data it needs, for example an [UserAccount], an [InvoiceItem] or lists of those
 - created documents can then be stored in the database as [CustomerFile]
-    /Controller/PdfWriter/...
+    - /Controller/PdfWriter/...
