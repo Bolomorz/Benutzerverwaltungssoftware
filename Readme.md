@@ -16,7 +16,7 @@ software for managing customers and printing invoices.
 2.1 internal communication between elements
 
 - using a standardized [ReturnDialog(T)] as communication object
-    /Controller/Data/ReturnDialog.cs
+    - /Controller/Data/ReturnDialog.cs
 - standardized or dynamic messages
 - boolean whether process completed successfully
 - generic (T) as return value, for example [ReturnDialog(UserAccount)]
