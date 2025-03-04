@@ -11,15 +11,15 @@ software for managing customers and printing invoices.
 - PdfSharp
 - ASP.Net web application
 
-2. solutions to different programming problems
+2. solutions to different problems
 
 2.1 internal communication between elements
 
-- using a standardized [ReturnDialog<T>] as communication object
+- using a standardized [ReturnDialog(T)] as communication object
     /Controller/Data/ReturnDialog.cs
 - standardized or dynamic messages
 - boolean whether process completed successfully
-- generic <T> as return value, for example [ReturnDialog<UserAccount>]
+- generic (T) as return value, for example [ReturnDialog(UserAccount)]
 
 2.2 Authentification
 
@@ -43,7 +43,7 @@ software for managing customers and printing invoices.
     - [InvoiceItem] item of an invoice
     - [CustomerInvoiceItem] cross table of [Customer] and [InvoiceItem]
     - [CustomerFile] saved files of a customer
-    - [CustomerBooking] booking of paid amount by customer (to calculate amount still to pay)
+    - [CustomerBooking] history of bookings of customer
     - [Log] list of error logs occuring in program
     /DatabaseModel/CustomerManagementsObjects.cs
 - functions of database are realized using transactions where needed, creating the database objects and disposing of it when the function ends
