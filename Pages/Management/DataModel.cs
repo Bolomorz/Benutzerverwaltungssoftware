@@ -50,3 +50,15 @@ public class InvoiceItemModel
         return new(Message.ValidationSucccessful);
     }
 }
+
+public class CustomerInvoiceItemModel
+{
+    public required int ID { get; set; }
+    public required string Value { get; set; }
+
+    public ReturnDialog Validate()
+    {
+        if(!DataModelValidation.ValidateDecimal(Value)) return new(new(MID.FailedValidation, false, $"Geben Sie einen korrekten Wert ein. Zeichen: {DataModelValidation.DecimalChars}"));
+        return new(Message.ValidationSucccessful);
+    }
+}

@@ -1,3 +1,5 @@
+@model List<CustomerInvoiceItemModel>
+
 @{
     var rd = Global.Session is not null && Global.Session.User is not null && Information.CustomerID > 0 ? Global.Session?.User?.GetCustomer((int)Information.CustomerID) : null;
     if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;
@@ -27,10 +29,48 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 50%;">Name</th>
+                    <th style="width: 25%;">Bezahlter Betrag</th>
+                    <th style="width: 25%;">Fehlender Betrag</th>
+                </tr>
             </thead>
             <tbody>
-
+                <tr>
+                    <td>@customer.GivenName @customer.Surname</td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="data-red">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th  style="width: 30%;">Rechnungsposten</th>
+                    <th  style="width: 50%;">Wert</th>
+                    <th  style="width: 20%;">Aktivieren</th>     
+                </tr>          
+            </thead>
+            <tbody>
+                @for(int i = 0; i < customer.CustomerInvoiceItems.Count; i++)
+                {
+                    var item = customer.CustomerInvoiceItems[i];
+                    Model.Add(new(){ID = item.InvoiceItemID, Value = "" });
+                    <tr>
+                        <td>
+                            <input type="hidden" asp-for="@Model[i].ID" value="@item.InvoiceItemID"/>
+                            @item.InvoiceItem?.Name
+                        </td>
+                        <td><input type="text" asp-for="@Model[i].Value" value="@item.Value"/></td>
+                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@item.Active"/></td>
+                    </tr>
+                }
+                <tr>
+                    <td></td><td><input class="nav-red" type="submit" asp-page-handler="SaveItems" value="Speichern"/></td><td></td>
+                </tr>
             </tbody>
         }
     </table>
@@ -59,10 +99,48 @@
         @if(customer is not null)
         {
             <thead>
-                
+                <tr>
+                    <th style="width: 50%;">Name</th>
+                    <th style="width: 25%;">Bezahlter Betrag</th>
+                    <th style="width: 25%;">Fehlender Betrag</th>
+                </tr>
             </thead>
             <tbody>
-
+                <tr>
+                    <td>@customer.GivenName @customer.Surname</td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="data-blue">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th  style="width: 30%;">Rechnungsposten</th>
+                    <th  style="width: 50%;">Wert</th>
+                    <th  style="width: 20%;">Aktivieren</th>     
+                </tr>          
+            </thead>
+            <tbody>
+                @for(int i = 0; i < customer.CustomerInvoiceItems.Count; i++)
+                {
+                    var item = customer.CustomerInvoiceItems[i];
+                    Model.Add(new(){ID = item.InvoiceItemID, Value = "" });
+                    <tr>
+                        <td>
+                            <input type="hidden" asp-for="@Model[i].ID" value="@item.InvoiceItemID"/>
+                            @item.InvoiceItem?.Name
+                        </td>
+                        <td><input type="text" asp-for="@Model[i].Value" value="@item.Value"/></td>
+                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@item.Active"/></td>
+                    </tr>
+                }
+                <tr>
+                    <td></td><td><input class="nav-blue" type="submit" asp-page-handler="SaveItems" value="Speichern"/></td><td></td>
+                </tr>
             </tbody>
         }
     </table>

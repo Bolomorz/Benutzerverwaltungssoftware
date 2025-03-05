@@ -10,6 +10,7 @@ public class ManagementModel : PageModel
 {
     [BindProperty] public CustomerModel CDM { get; set; }
     [BindProperty] public InvoiceItemModel IIDM { get; set; }
+    [BindProperty] public List<CustomerInvoiceItemModel> CIIDM { get; set; }
 
     public ManagementModel()
     {
@@ -33,6 +34,7 @@ public class ManagementModel : PageModel
             DefaultValue = "",
             TransformFormula = ""
         };
+        CIIDM = new();
     }
 
     public IActionResult OnGet() => Global.Session is null || Global.Session.User is null ? RedirectToPage("/PageSession/Login") : Page();
@@ -53,21 +55,25 @@ public class ManagementModel : PageModel
     }
     public IActionResult OnPostSelectCustomerData()
     {
+        Information.InvoiceItemID = null;
         Information.Partial = Management.Partial.CustomerData;
         return Page();
     }
     public IActionResult OnPostSelectCustomerFile()
     {
+        Information.InvoiceItemID = null;
         Information.Partial = Management.Partial.CustomerFile;
         return Page();
     }
     public IActionResult OnPostSelectCustomerInvoiceItem()
     {
+        Information.InvoiceItemID = null;
         Information.Partial = Management.Partial.CustomerInvoiceItem;
         return Page();
     }
     public IActionResult OnPostSelectCustomerBooking()
     {
+        Information.InvoiceItemID = null;
         Information.Partial = Management.Partial.CustomerBooking;
         return Page();
     }
@@ -168,6 +174,40 @@ public class ManagementModel : PageModel
         Information.Partial = rds.Message.Success ? Management.Partial.InvoiceItemList : Management.Partial.InvoiceItem;
 
         return Page();
+    }
+    public IActionResult OnPostSaveItems(string[] Selected)
+    {
+        if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
+
+        if(Information.InvoiceItemID is null && Information.CustomerID is null) return Page();
+
+        foreach(var item in CIIDM) 
+        {
+            var rdv = item.Validate();
+            if(!rdv.Message.Success) 
+            { 
+                Information.Message = rdv.Message; 
+                return Page();
+            }
+        }
+
+        foreach(var item in CIIDM)
+        {
+            var selected = IsSelected(Selected, item);
+            var rds = Information.CustomerID is not null ? 
+                Global.Session.User.SaveCustomerInvoiceItem(DataModelValidation.StringToDecimal(item.Value), selected, (int)Information.CustomerID, item.ID) :
+                Information.InvoiceItemID is not null ?
+                Global.Session.User.SaveCustomerInvoiceItem(DataModelValidation.StringToDecimal(item.Value), selected, item.ID, (int)Information.InvoiceItemID) :
+                new(new(MID.NullValue, false, ""));
+            Information.Message = rds.Message.Success ? Information.Message : rds.Message;
+        }
+
+        return Page();
+    }
+    private static bool IsSelected(string[] selected, CustomerInvoiceItemModel model)
+    {
+        foreach(var select in selected) if(model.ID.ToString() == select) return true;
+        return false;
     }
 
     public IActionResult OnPostDeleteCustomer(int? id)

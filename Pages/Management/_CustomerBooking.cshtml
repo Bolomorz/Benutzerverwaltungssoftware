@@ -30,6 +30,25 @@
         {
             <thead>
                 <tr>
+                    <th style="width: 50%;">Name</th>
+                    <th style="width: 25%;">Bezahlter Betrag</th>
+                    <th style="width: 25%;">Fehlender Betrag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@customer.GivenName @customer.Surname</td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="data-red">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
                     <th style="width: 20%;">Betrag buchen</th>
                     <th style="width: 80%;"><input type="text" placeholder="@DataModelValidation.DecimalChars" asp-for="@Model.Book"/></th>
                 </tr>
@@ -97,6 +116,25 @@
 }
 
 <form method="post">
+    <table class="data-blue">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Name</th>
+                    <th style="width: 25%;">Bezahlter Betrag</th>
+                    <th style="width: 25%;">Fehlender Betrag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@customer.GivenName @customer.Surname</td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                </tr>
+            </tbody>
+        }
+    </table>
     <table class="data-blue">
         @if(customer is not null)
         {

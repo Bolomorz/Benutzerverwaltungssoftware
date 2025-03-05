@@ -45,7 +45,7 @@
                         case Management.Partial.CustomerFile:
                         <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
                         case Management.Partial.CustomerInvoiceItem:
-                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
+                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml" for="@Model.CIIDM"/> break;
                         case Management.Partial.CustomerBooking:
                         <partial name="/Pages/Management/_CustomerBooking.cshtml" for="@Model.CDM"/> break;
                         case Management.Partial.CustomerList:
@@ -99,7 +99,7 @@
                         case Management.Partial.CustomerFile:
                         <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
                         case Management.Partial.CustomerInvoiceItem:
-                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml"/> break;
+                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml" for="@Model.CIIDM"/> break;
                         case Management.Partial.CustomerBooking:
                         <partial name="/Pages/Management/_CustomerBooking.cshtml" for="@Model.CDM"/> break;
                         case Management.Partial.CustomerList:
