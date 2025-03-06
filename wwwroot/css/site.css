@@ -66,348 +66,302 @@ body {
 /*---*/
 /*base container*/
 
-  /*Red*/
-    .base-red{
-      width: 98%;
+  .base-red,
+  .base-blue{
+    width: 98%;
       margin-left: auto;
       margin-right: auto;
       margin-top: 10px;
       text-align: center;
       color: white;
-      background-color: var(--RedBaseColor);
-      box-shadow: 0 0 50px var(--RedBaseColor);
       overflow: auto;
-    }
-    .base-red table{
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .base-red td{
-      vertical-align: top;
-    }
-    .base-red tr td:first-child{
-      width: 10%;
-      min-width: 10%;
-      max-width: 10%;
-      word-break: break-all;
-    }
+  }
+  .base-red table,
+  .base-blue table{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .base-red td,
+  .base-blue td{
+    vertical-align: top;
+  }
+  .base-red tr td:first-child,
+  .base-blue tr td:first-child{
+    width: 10%;
+    min-width: 10%;
+    max-width: 10%;
+    word-break: break-all;
+  }
+
+  /*Red*/
+  .base-red{
+    background-color: var(--RedBaseColor);
+    box-shadow: 0 0 50px var(--RedBaseColor);
+  }
 
   /*Blue*/
-    .base-blue{
-      width: 98%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      text-align: center;
-      color: white;
-      background-color: var(--BlueBaseColor);
-      box-shadow: 0 0 50px var(--BlueBaseColor);
-      overflow: auto;
-    }
-    .base-blue table{
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .base-blue td{
-      vertical-align: top;
-    }
-    .base-blue tr td:first-child{
-      width: 10%;
-      min-width: 10%;
-      max-width: 10%;
-      word-break: break-all;
-    }
+  .base-blue{
+    background-color: var(--BlueBaseColor);
+    box-shadow: 0 0 50px var(--BlueBaseColor);
+  }
 
 /*---*/
 
 /*---*/
 /*status bar container*/
 
+  .status-red,
+  .status-blue{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
   /*Red*/
-    .status-red{
-      width: 95%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-      background-color: var(--RedElementColor);
-      box-shadow: 0 0 10px var(--RedElementColor);
-    }
+  .status-red{
+    background-color: var(--RedElementColor);
+    box-shadow: 0 0 10px var(--RedElementColor);
+  }
 
   /*Blue*/
-    .status-blue{
-      width: 95%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-      background-color: var(--BlueElementColor);
-      box-shadow: 0 0 10px var(--BlueElementColor);
-    }
+  .status-blue{
+    background-color: var(--BlueElementColor);
+    box-shadow: 0 0 10px var(--BlueElementColor);
+  }
+
 /*---*/
 
 /*---*/
 /*login form container*/
 
+  .login-red,
+  .login-blue{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .login-red table,
+  .login-blue table{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .login-red td,
+  .login-blue td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .login-red tr td:first-child,
+  .login-blue tr td:first-child{
+    width: 25%;
+    min-width: 25%;
+    max-width: 25%;
+    word-break: break-all;
+  }
+
   /*Red*/
-    .login-red{
-      width: 30%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      margin-bottom: 50px;
-      text-align: center;
-      background-color: var(--RedElementColor);
-      box-shadow: 0 0 10px var(--RedElementColor);
-    }
-    .login-red table{
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-    .login-red td{
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    .login-red tr td:first-child{
-      width: 25%;
-      min-width: 25%;
-      max-width: 25%;
-      word-break: break-all;
-    }
+  .login-red{
+    background-color: var(--RedElementColor);
+    box-shadow: 0 0 10px var(--RedElementColor);
+  }
 
   /*Blue*/
-    .login-blue{
-      width: 30%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      margin-bottom: 50px;
-      text-align: center;
-      background-color: var(--BlueElementColor);
-      box-shadow: 0 0 10px var(--BlueElementColor);
-    }
-    .login-blue table{
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-    .login-blue td{
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    .login-blue tr td:first-child{
-      width: 25%;
-      min-width: 25%;
-      max-width: 25%;
-      word-break: break-all;
-    }
+  .login-blue{
+    background-color: var(--BlueElementColor);
+    box-shadow: 0 0 10px var(--BlueElementColor);
+  }
 
 /*---*/
 
 /*---*/
 /*select buttons container*/
 
-  /*Red*/
-    .select-red{
+  .select-red,
+  .select-blue{
     width: 98%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+  }
+  .select-red table,
+  .select-blue table{
+    width: 100%;
+    margin: 0px;
+  }
+  .select-red td,
+  .select-blue td{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 100%;
+    height: 80px;
+  }
+  .select-top-red,
+  .select-top-blue{
+    width: 98%;
+    height: 98%;
+    margin: auto;
+    color: black;
+  }
+  .select-top-red:hover,
+  .select-top-blue:hover{
+    color: white;
+  }
+  .select-lower-red,
+  .select-lower-blue{
+    width: 96%;
+    height: 96%;
+    margin: auto;
+    color: black;
+  }
+  .select-lower-red:hover,
+  .select-lower-blue:hover{
+    color: white;
+  }
+
+  /*Red*/
+  .select-red{
     background-color: var(--RedElementColor);
     box-shadow: 0 0 10px var(--RedElementColor);
-    }
-    .select-red table{
-      width: 100%;
-      margin: 0px;
-    }
-    .select-red td{
-      padding-top: 1px;
-      padding-bottom: 1px;
-      width: 100%;
-      height: 80px;
-    }
-    .select-top-red{
-      width: 98%;
-      height: 98%;
-      margin: auto;
-      background-color: var(--RedNavColor);
-      color: black;
-    }
-    .select-top-red:hover{
-      background-color: var(--RedNavHoverColor);
-      color: white;
-    }
-    .select-lower-red{
-      width: 96%;
-      height: 96%;
-      margin: auto;
-      background-color: var(--RedNavColor);
-      color: black;
-    }
-    .select-lower-red:hover{
-      background-color: var(--RedNavHoverColor);
-      color: white;
-    }
+  }
+  .select-top-red{
+    background-color: var(--RedNavColor);
+  }
+  .select-top-red:hover{
+    background-color: var(--RedNavHoverColor);
+  }
+  .select-lower-red{
+    background-color: var(--RedNavColor);
+  }
+  .select-lower-red:hover{
+    background-color: var(--RedNavHoverColor);
+  }
 
   /*Blue*/
-    .select-blue{
-      width: 98%;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      background-color: var(--BlueElementColor);
-      box-shadow: 0 0 10px var(--BlueElementColor);
-    }
-    .select-blue table{
-      width: 100%;
-      margin: 0px;
-    }
-    .select-blue td{
-      padding-top: 1px;
-      padding-bottom: 1px;
-      width: 100%;
-      height: 80px;
-    }
-    .select-top-blue{
-      width: 98%;
-      height: 98%;
-      margin: auto;
-      background-color: var(--BlueNavColor);
-      color: black;
-    }
-    .select-top-blue:hover{
-      background-color: var(--BlueNavHoverColor);
-      color: white;
-    }
-    .select-lower-blue{
-      width: 96%;
-      height: 96%;
-      margin: auto;
-      background-color: var(--BlueNavColor);
-      color: black;
-    }
-    .select-lower-blue:hover{
-      background-color: var(--BlueNavHoverColor);
-      color: white;
-    }
+  .select-blue{
+    background-color: var(--BlueElementColor);
+    box-shadow: 0 0 10px var(--BlueElementColor);
+  }
+  .select-top-blue{
+    background-color: var(--BlueNavColor);
+  }
+  .select-top-blue:hover{
+    background-color: var(--BlueNavHoverColor);
+  }
+  .select-lower-blue{
+    background-color: var(--BlueNavColor);
+  }
+  .select-lower-blue:hover{
+    background-color: var(--BlueNavHoverColor);
+  }
+
 /*---*/
 
 /*---*/
 /*container of data form and table*/
 
+  .data-red,
+  .data-blue{
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .data-red table,
+  .data-blue table{
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+  }
+  .data-red thead th,
+  .data-blue thead th{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    max-height: 50px;
+  }
+  .data-red th, .data-red td,
+  .data-blue th, .data-blue td{
+    padding: 10px;
+    text-align: left;
+  }
+
   /*Red*/
-    .data-red{
-      width: 98%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      background-color: var(--RedElementColor);
-      text-align: center;
-    }
-    .data-red table{
-      border-collapse: collapse;
-      width: 100%;
-      color: black;
-    }
-    .data-red thead th{
-      background-color: var(--RedTHeadColor);
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      max-height: 50px;
-    }
-    .data-red th, .data-red td{
-      padding: 10px;
-      text-align: left;
-    }
-    .data-red tbody tr:nth-of-type(even) {
-      background-color: var(--RedTBodyEvenColor);
-    }  
-    .data-red tbody tr:nth-of-type(odd) {
-      background-color: var(--RedTBodyOddColor);
-    }
+  .data-red{
+    background-color: var(--RedElementColor);
+  }
+  .data-red thead th{
+    background-color: var(--RedTHeadColor);
+  }
+  .data-red tbody tr:nth-of-type(even) {
+    background-color: var(--RedTBodyEvenColor);
+  }  
+  .data-red tbody tr:nth-of-type(odd) {
+    background-color: var(--RedTBodyOddColor);
+  }
 
   /*Blue*/
-    .data-blue{
-      width: 98%;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      background-color: var(--BlueElementColor);
-      text-align: center;
-    }
-    .data-blue table{
-      border-collapse: collapse;
-      width: 100%;
-      color: white;
-    }
-    .data-blue thead th{
-      background-color: var(--BlueTHeadColor);
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      max-height: 50px;
-    }
-    .data-blue th, .data-blue td{
-      padding: 10px;
-      text-align: left;
-    }
-    .data-blue tbody tr:nth-of-type(even) {
-      background-color: var(--BlueTBodyEvenColor);
-    }  
-    .data-blue tbody tr:nth-of-type(odd) {
-      background-color: var(--BlueTBodyOddColor);
-    }
+  .data-blue{
+    background-color: var(--BlueElementColor);
+  }
+  .data-blue thead th{
+    background-color: var(--BlueTHeadColor);
+  }
+  .data-blue tbody tr:nth-of-type(even) {
+    background-color: var(--BlueTBodyEvenColor);
+  }  
+  .data-blue tbody tr:nth-of-type(odd) {
+    background-color: var(--BlueTBodyOddColor);
+  }
 
 /*---*/
 
 /*---*/
 /*submit buttons for navigation and deletion*/
 
+  .nav-red:hover, .del-red:hover,
+  .nav-blue:hover, .del-blue:hover{
+    color: white;
+  }
+
   /*Red*/
-    .nav-red{
-      background-color: var(--RedNavColor);
-    }
-    .nav-red:hover{
-      background-color: var(--RedNavHoverColor);
-      color: white;
-    }
-    .del-red{
-      background-color: var(--RedDelColor);
-    }
-    .del-red:hover{
-      background-color: var(--RedDelHoverColor);
-      color: white;
-    }
+  .nav-red{
+    background-color: var(--RedNavColor);
+  }
+  .nav-red:hover{
+    background-color: var(--RedNavHoverColor);
+  }
+  .del-red{
+    background-color: var(--RedDelColor);
+  }
+  .del-red:hover{
+    background-color: var(--RedDelHoverColor);
+  }
 
   /*Blue*/
-    .nav-blue{
-      background-color: var(--BlueNavColor);
-    }
-    .nav-blue:hover{
-      background-color: var(--BlueNavHoverColor);
-      color: white;
-    }
-    .del-blue{
-      background-color: var(--BlueDelColor);
-    }
-    .del-blue:hover{
-      background-color: var(--BlueDelHoverColor);
-      color: white;
-    }
+  .nav-blue{
+    background-color: var(--BlueNavColor);
+  }
+  .nav-blue:hover{
+    background-color: var(--BlueNavHoverColor);
+  }
+  .del-blue{
+    background-color: var(--BlueDelColor);
+  }
+  .del-blue:hover{
+    background-color: var(--BlueDelHoverColor);
+  }
 
 /*---*/
 
