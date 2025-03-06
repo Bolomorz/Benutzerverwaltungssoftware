@@ -189,4 +189,95 @@
 </form>
 
     break;
+
+    case ColorMode.Gray:
+
+@if(Information.Message is not null)
+{
+    <div class="status-gray">
+        @if(Information.Message.Success)
+        {
+            <p style="background-color:rgb(122, 150, 96); border-color: rgb(12, 70, 12);">@Information.Message.Error</p>
+        }
+        else
+        {
+            <p style="background-color:rgb(241, 146, 146); border-color: rgb(146, 53, 53);">@Information.Message.Error</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <table class="data-gray">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Name</th>
+                    <th style="width: 25%;">Bezahlter Betrag</th>
+                    <th style="width: 25%;">Fehlender Betrag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@customer.GivenName @customer.Surname</td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="data-gray">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Betrag buchen</th>
+                    <th style="width: 80%;"><input type="text" placeholder="@DataModelValidation.DecimalChars" asp-for="@Model.Book"/></th>
+                </tr>
+                <tr>
+                    <th>Beschreibung</th>
+                    <th><input type="text" asp-for="@Model.BookingDescription"/></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="nav-gray" type="submit" asp-page-handler="BookCustomer" value="Buchen"/></th>
+                </tr>
+            </thead>
+        }
+    </table>
+    <table class="data-gray">
+        @if(customer is not null)
+        {
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Buchungszeitpunkt</th>
+                    <th style="width: 60%;">Beschreibung</th>
+                    <th style="width: 10%;">Buchung</th>
+                    <th style="width: 10%;">Endwert</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{decimal total = 0;}
+                @foreach(var booking in customer.CustomerBookings)
+                {
+                    total += booking.BookingAmount is not null ? (decimal)booking.BookingAmount : 0;
+                    <tr>
+                        <td>@booking.Time</td>
+                        <td>@booking.Description</td>
+                        <td>@booking.BookingAmount @Global.CurrencySign</td>
+                        <td>@total @Global.CurrencySign</td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td>Bezahlter Betrag: </td>
+                    <td>@customer.PaidAmount @Global.CurrencySign</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</form>
+
+    break;
 }

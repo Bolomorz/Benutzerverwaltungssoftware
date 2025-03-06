@@ -6,7 +6,7 @@ internal static class Global
 {
     internal static Session.Session? Session { get; private set; } = null;
     internal static int Year { get; set; } = DateTime.Now.Year;
-    internal static ColorMode ColorMode { get; set; } = ColorMode.Blue;
+    internal static ColorMode ColorMode { get; set; } = ColorMode.Gray;
     internal static string CurrencySign { get; set; } = "€";
 
     internal static ReturnDialog OpenSession(string username, string plainpw)
@@ -17,4 +17,4 @@ internal static class Global
     internal static void CloseSession() => Session = null;
 }
 
-internal enum ColorMode { Red, Blue }
+internal enum ColorMode { Red, Blue, Gray }

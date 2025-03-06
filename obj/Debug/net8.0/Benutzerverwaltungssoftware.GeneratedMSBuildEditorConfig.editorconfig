@@ -66,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFuYWdlbWVudC9fQ3VzdG9tZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Management/_InvoiceItemCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFuYWdlbWVudC9fSW52b2ljZUl0ZW1DdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/mnt/LinuxPartition/Repositories/Benutzerverwaltungssoftware/Pages/Management/_InvoiceItemData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFuYWdlbWVudC9fSW52b2ljZUl0ZW1EYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

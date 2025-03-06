@@ -37,9 +37,21 @@ html {
   --BlueNavHoverColor: rgb(0, 85, 85);
   --BlueDelColor: rgb(255, 0, 43);
   --BlueDelHoverColor: rgb(65, 1, 11);
-  --BlueTHeadColor: rgb(21, 21, 199);
-  --BlueTBodyEvenColor: rgb(68, 115, 216);
-  --BlueTBodyOddColor: rgb(36, 36, 139);
+  --BlueTHeadColor: rgb(12, 141, 253);
+  --BlueTBodyEvenColor: rgb(184, 222, 255);
+  --BlueTBodyOddColor: rgb(123, 191, 250);
+  /**/
+
+  /*color mode Gray*/
+  --GrayBaseColor: black;
+  --GrayElementColor: rgb(71, 71, 71);
+  --GrayNavColor: rgb(238, 238, 238);
+  --GrayNavHoverColor: rgb(26, 26, 26);
+  --GrayDelColor: rgb(238, 238, 238);
+  --GrayDelHoverColor: rgb(26, 26, 26);
+  --GrayTHeadColor: rgb(187, 187, 187);
+  --GrayTBodyEvenColor: rgb(204, 204, 204);
+  --GrayTBodyOddColor: rgb(221, 221, 221);
   /**/
 
   /*color mode template*/
@@ -65,9 +77,9 @@ body {
 
 /*---*/
 /*base container*/
-
   .base-red,
-  .base-blue{
+  .base-blue,
+  .base-gray{
     width: 98%;
       margin-left: auto;
       margin-right: auto;
@@ -77,17 +89,20 @@ body {
       overflow: auto;
   }
   .base-red table,
-  .base-blue table{
+  .base-blue table,
+  .base-gray table{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
   .base-red td,
-  .base-blue td{
+  .base-blue td,
+  .base-gray td{
     vertical-align: top;
   }
   .base-red tr td:first-child,
-  .base-blue tr td:first-child{
+  .base-blue tr td:first-child,
+  .base-gray tr td:first-child{
     width: 10%;
     min-width: 10%;
     max-width: 10%;
@@ -106,13 +121,24 @@ body {
     box-shadow: 0 0 50px var(--BlueBaseColor);
   }
 
+  /*Gray*/
+  .base-gray{
+    background-color: var(--GrayBaseColor);
+    box-shadow: 0 0 50px var(--GrayBaseColor);
+  }
+
+  /*Template*/
+  .base-{
+    background-color: var(--BaseColor);
+    box-shadow: 0 0 50px var(--BaseColor);
+  }
 /*---*/
 
 /*---*/
 /*status bar container*/
-
   .status-red,
-  .status-blue{
+  .status-blue,
+  .status-gray{
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -133,13 +159,24 @@ body {
     box-shadow: 0 0 10px var(--BlueElementColor);
   }
 
+  /*Gray*/
+  .status-gray{
+    background-color: var(--GrayElementColor);
+    box-shadow: 0 0 10px var(--GrayElementColor);
+  }
+
+  /*Template*/
+  .status-{
+    background-color: var(--ElementColor);
+    box-shadow: 0 0 10px var(--ElementColor);
+  }
 /*---*/
 
 /*---*/
 /*login form container*/
-
   .login-red,
-  .login-blue{
+  .login-blue,
+  .login-gray{
     width: 30%;
     margin-left: auto;
     margin-right: auto;
@@ -148,7 +185,8 @@ body {
     text-align: center;
   }
   .login-red table,
-  .login-blue table{
+  .login-blue table,
+  .login-gray table{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -158,12 +196,14 @@ body {
     padding-bottom: 30px;
   }
   .login-red td,
-  .login-blue td{
+  .login-blue td,
+  .login-gray td{
     padding-top: 10px;
     padding-bottom: 10px;
   }
   .login-red tr td:first-child,
-  .login-blue tr td:first-child{
+  .login-blue tr td:first-child,
+  .login-gray tr td:first-child{
     width: 25%;
     min-width: 25%;
     max-width: 25%;
@@ -182,50 +222,68 @@ body {
     box-shadow: 0 0 10px var(--BlueElementColor);
   }
 
+  /*Gray*/
+  .login-gray{
+    background-color: var(--GrayElementColor);
+    box-shadow: 0 0 10px var(--GrayElementColor);
+  }
+
+  /*Template*/
+  .login-{
+    background-color: var(--ElementColor);
+    box-shadow: 0 0 10px var(--ElementColor);
+  }
 /*---*/
 
 /*---*/
 /*select buttons container*/
 
   .select-red,
-  .select-blue{
+  .select-blue,
+  .select-gray{
     width: 98%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
   }
   .select-red table,
-  .select-blue table{
+  .select-blue table,
+  .select-gray table{
     width: 100%;
     margin: 0px;
   }
   .select-red td,
-  .select-blue td{
+  .select-blue td,
+  .select-gray td{
     padding-top: 1px;
     padding-bottom: 1px;
     width: 100%;
     height: 80px;
   }
   .select-top-red,
-  .select-top-blue{
+  .select-top-blue,
+  .select-top-gray{
     width: 98%;
     height: 98%;
     margin: auto;
     color: black;
   }
   .select-top-red:hover,
-  .select-top-blue:hover{
+  .select-top-blue:hover,
+  .select-top-gray:hover{
     color: white;
   }
   .select-lower-red,
-  .select-lower-blue{
+  .select-lower-blue,
+  .select-lower-gray{
     width: 96%;
     height: 96%;
     margin: auto;
     color: black;
   }
   .select-lower-red:hover,
-  .select-lower-blue:hover{
+  .select-lower-blue:hover,
+  .select-lower-gray:hover{
     color: white;
   }
 
@@ -265,13 +323,49 @@ body {
     background-color: var(--BlueNavHoverColor);
   }
 
+  /*Gray*/
+  .select-gray{
+    background-color: var(--GrayElementColor);
+    box-shadow: 0 0 10px var(--GrayElementColor);
+  }
+  .select-top-gray{
+    background-color: var(--GrayNavColor);
+  }
+  .select-top-gray:hover{
+    background-color: var(--GrayNavHoverColor);
+  }
+  .select-lower-gray{
+    background-color: var(--GrayNavColor);
+  }
+  .select-lower-gray:hover{
+    background-color: var(--GrayNavHoverColor);
+  }
+
+  /*Template*/
+  .select-{
+    background-color: var(--ElementColor);
+    box-shadow: 0 0 10px var(--ElementColor);
+  }
+  .select-top-{
+    background-color: var(--NavColor);
+  }
+  .select-top-:hover{
+    background-color: var(--NavHoverColor);
+  }
+  .select-lower-{
+    background-color: var(--NavColor);
+  }
+  .select-lower-:hover{
+    background-color: var(--NavHoverColor);
+  }
 /*---*/
 
 /*---*/
 /*container of data form and table*/
 
   .data-red,
-  .data-blue{
+  .data-blue,
+  .data-gray{
     width: 98%;
     margin-left: auto;
     margin-right: auto;
@@ -279,20 +373,23 @@ body {
     text-align: center;
   }
   .data-red table,
-  .data-blue table{
+  .data-blue table,
+  .data-gray table{
     border-collapse: collapse;
     width: 100%;
     color: black;
   }
   .data-red thead th,
-  .data-blue thead th{
+  .data-blue thead th,
+  .data-gray thead th{
     position: sticky;
     top: 0;
     z-index: 1;
     max-height: 50px;
   }
   .data-red th, .data-red td,
-  .data-blue th, .data-blue td{
+  .data-blue th, .data-blue td,
+  .data-gray th, .data-gray td{
     padding: 10px;
     text-align: left;
   }
@@ -325,13 +422,41 @@ body {
     background-color: var(--BlueTBodyOddColor);
   }
 
+  /*Gray*/
+  .data-gray{
+    background-color: var(--GrayElementColor);
+  }
+  .data-gray thead th{
+    background-color: var(--GrayTHeadColor);
+  }
+  .data-gray tbody tr:nth-of-type(even) {
+    background-color: var(--GrayTBodyEvenColor);
+  }  
+  .data-gray tbody tr:nth-of-type(odd) {
+    background-color: var(--GrayTBodyOddColor);
+  }
+
+  /*Template*/
+  .data-{
+    background-color: var(--ElementColor);
+  }
+  .data- thead th{
+    background-color: var(--THeadColor);
+  }
+  .data- tbody tr:nth-of-type(even) {
+    background-color: var(--TBodyEvenColor);
+  }  
+  .data- tbody tr:nth-of-type(odd) {
+    background-color: var(--TBodyOddColor);
+  }
 /*---*/
 
 /*---*/
 /*submit buttons for navigation and deletion*/
 
   .nav-red:hover, .del-red:hover,
-  .nav-blue:hover, .del-blue:hover{
+  .nav-blue:hover, .del-blue:hover,
+  .nav-gray:hover, .del-gray:hover{
     color: white;
   }
 
@@ -363,6 +488,33 @@ body {
     background-color: var(--BlueDelHoverColor);
   }
 
+  /*Gray*/
+  .nav-gray{
+    background-color: var(--GrayNavColor);
+  }
+  .nav-gray:hover{
+    background-color: var(--GrayNavHoverColor);
+  }
+  .del-gray{
+    background-color: var(--GrayDelColor);
+  }
+  .del-gray:hover{
+    background-color: var(--GrayDelHoverColor);
+  }
+
+  /*Template*/
+  .nav-{
+    background-color: var(--NavColor);
+  }
+  .nav-:hover{
+    background-color: var(--NavHoverColor);
+  }
+  .del-{
+    background-color: var(--DelColor);
+  }
+  .del-:hover{
+    background-color: var(--DelHoverColor);
+  }
 /*---*/
 
 

@@ -5,6 +5,10 @@
     var rdc = Global.Session is not null && Global.Session.User is not null && Information.CustomerID is not null && Information.CustomerID > 0 ?
         Global.Session.User.GetCustomer((int)Information.CustomerID) : null;
     var customer = rdc is not null && rdc.Message.Success && rdc.ReturnValue is not null ? rdc.ReturnValue : null;
+
+    var rdi = Global.Session is not null && Global.Session.User is not null && Information.InvoiceItemID is not null && Information.InvoiceItemID > 0 ?
+        Global.Session.User.GetInvoiceItem((int)Information.InvoiceItemID) : null;
+    var item = rdi is not null && rdi.Message.Success && rdi.ReturnValue is not null ? rdi.ReturnValue : null;
 }
 
 @switch(Global.ColorMode)
@@ -32,6 +36,12 @@
                                 <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
                                 <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
                             }
+                            else if(item is not null)
+                            {
+                                <tr><td><p style="vertical-align: middle; background-color: brown;">Rechnungsposten:<br>@item.Name</p></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectInvoiceItemData" value="Rechnungspostendaten"/></td></tr>
+                                <tr><td><input class="select-lower-red" type="submit" asp-page-handler="SelectInvoiceItemCustomer" value="Kunden-Rechnungsposten"/></td></tr>
+                            }
                         </table>
                     </form>
                 </div>
@@ -54,6 +64,8 @@
                         <partial name="/Pages/Management/_InvoiceItemData.cshtml" for="@Model.IIDM"/> break;
                         case Management.Partial.InvoiceItemList:
                         <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
+                        case Management.Partial.InvoiceItemCustomer:
+                        <partial name="/Pages/Management/_InvoiceItemCustomer.cshtml" for="@Model.CIIDM"/> break;
                     }
                 </div>
             </td>
@@ -86,6 +98,12 @@
                                 <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
                                 <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
                             }
+                            else if(item is not null)
+                            {
+                                <tr><td><p style="vertical-align: middle; background-color: rgb(148, 14, 236);">Rechnungsposten:<br>@item.Name</p></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectInvoiceItemData" value="Rechnungspostendaten"/></td></tr>
+                                <tr><td><input class="select-lower-blue" type="submit" asp-page-handler="SelectInvoiceItemCustomer" value="Kunden-Rechnungsposten"/></td></tr>
+                            }
                         </table>
                     </form>
                 </div>
@@ -108,6 +126,70 @@
                         <partial name="/Pages/Management/_InvoiceItemData.cshtml" for="@Model.IIDM"/> break;
                         case Management.Partial.InvoiceItemList:
                         <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
+                        case Management.Partial.InvoiceItemCustomer:
+                        <partial name="/Pages/Management/_InvoiceItemCustomer.cshtml" for="@Model.CIIDM"/> break;
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+    break;
+
+    case ColorMode.Gray:
+
+<div class="base-gray">
+    <table class="base-gray">
+        <tr>
+            <td>
+                <div class="select-gray">
+                    <form method="post">
+                        <table class="select-gray">
+                            <tr><td><input class="select-top-gray" type="submit" asp-page-handler="SelectCustomers" value="Kundenliste"/></td></tr>
+                            <tr><td><input class="select-top-gray" type="submit" asp-page-handler="SelectInvoiceItems" value="Rechnungspostenliste"/></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td><input class="select-top-gray" type="submit" asp-page-handler="NewCustomer" value="Neuen Kunden anlegen"/></td></tr>
+                            <tr><td><input class="select-top-gray" type="submit" asp-page-handler="NewInvoiceItem" value="Neuen Rechnungsposten anlegen"/></td></tr>
+
+                            @if(customer is not null)
+                            {
+                                <tr><td><p style="vertical-align: middle; background-color: rgb(148, 14, 236);">Kunde:<br>@customer.GivenName @customer.Surname</p></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectCustomerData" value="Kundendaten"/></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectCustomerFile" value="Kundendateien"/></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectCustomerInvoiceItem" value="Kunden-Rechnungsposten"/></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectCustomerBooking" value="Kundenbuchungen"/></td></tr>
+                            }
+                            else if(item is not null)
+                            {
+                                <tr><td><p style="vertical-align: middle; background-color: rgb(148, 14, 236);">Rechnungsposten:<br>@item.Name</p></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectInvoiceItemData" value="Rechnungspostendaten"/></td></tr>
+                                <tr><td><input class="select-lower-gray" type="submit" asp-page-handler="SelectInvoiceItemCustomer" value="Kunden-Rechnungsposten"/></td></tr>
+                            }
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="data-gray">
+                    @switch(Information.Partial)
+                    {
+                        case Management.Partial.CustomerData: 
+                        <partial name="/Pages/Management/_CustomerData.cshtml" for="@Model.CDM"/> break;
+                        case Management.Partial.CustomerFile:
+                        <partial name="/Pages/Management/_CustomerFile.cshtml"/> break;
+                        case Management.Partial.CustomerInvoiceItem:
+                        <partial name="/Pages/Management/_CustomerInvoiceItem.cshtml" for="@Model.CIIDM"/> break;
+                        case Management.Partial.CustomerBooking:
+                        <partial name="/Pages/Management/_CustomerBooking.cshtml" for="@Model.CDM"/> break;
+                        case Management.Partial.CustomerList:
+                        <partial name="/Pages/Management/_CustomerList.cshtml"/> break;
+                        case Management.Partial.InvoiceItemData:
+                        <partial name="/Pages/Management/_InvoiceItemData.cshtml" for="@Model.IIDM"/> break;
+                        case Management.Partial.InvoiceItemList:
+                        <partial name="/Pages/Management/_InvoiceItemList.cshtml"/> break;
+                        case Management.Partial.InvoiceItemCustomer:
+                        <partial name="/Pages/Management/_InvoiceItemCustomer.cshtml" for="@Model.CIIDM"/> break;
                     }
                 </div>
             </td>

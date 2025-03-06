@@ -1,10 +1,10 @@
 @model List<CustomerInvoiceItemModel>
 
 @{
-    var rd = Global.Session is not null && Global.Session.User is not null && Information.CustomerID > 0 ? 
-        Global.Session.User.GetCustomer((int)Information.CustomerID) : null;
+    var rd = Global.Session is not null && Global.Session.User is not null && Information.InvoiceItemID > 0 ? 
+        Global.Session.User.GetInvoiceItem((int)Information.InvoiceItemID) : null;
     if(rd is not null && !rd.Message.Success) Information.Message = rd.Message;
-    var customer = rd is not null && rd.Message.Success && rd.ReturnValue is not null ? rd.ReturnValue : null;
+    var item = rd is not null && rd.Message.Success && rd.ReturnValue is not null ? rd.ReturnValue : null;
 }
 
 @switch(Global.ColorMode)
@@ -27,46 +27,46 @@
 
 <form method="post">
     <table class="data-red">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th style="width: 50%;">Name</th>
-                    <th style="width: 25%;">Bezahlter Betrag</th>
-                    <th style="width: 25%;">Fehlender Betrag</th>
+                    <th style="width: 25%;">Name</th>
+                    <th style="width: 50%;">Beschreibung</th>
+                    <th style="width: 25%;">Summe</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@customer.GivenName @customer.Surname</td>
-                    <td>@customer.PaidAmount @Global.CurrencySign</td>
-                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems) @Global.CurrencySign</td>
                 </tr>
             </tbody>
         }
     </table>
     <table class="data-red">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th  style="width: 30%;">Rechnungsposten</th>
+                    <th  style="width: 30%;">Kunde</th>
                     <th  style="width: 50%;">Wert</th>
                     <th  style="width: 20%;">Aktivieren</th>     
                 </tr>          
             </thead>
             <tbody>
-                @for(int i = 0; i < customer.CustomerInvoiceItems.Count; i++)
+                @for(int i = 0; i < item.CustomerInvoiceItems.Count; i++)
                 {
-                    var item = customer.CustomerInvoiceItems[i];
+                    var cii = item.CustomerInvoiceItems[i];
                     Model.Add(new(){ID = item.InvoiceItemID, Value = "" });
                     <tr>
                         <td>
                             <input type="hidden" asp-for="@Model[i].ID" value="@item.InvoiceItemID"/>
-                            @item.InvoiceItem?.Name
+                            @cii.Customer?.GivenName @cii.Customer?.Surname
                         </td>
-                        <td><input type="text" asp-for="@Model[i].Value" value="@item.Value"/></td>
-                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@item.Active"/></td>
+                        <td><input type="text" asp-for="@Model[i].Value" value="@cii.Value"/></td>
+                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@cii.Active"/></td>
                     </tr>
                 }
                 <tr>
@@ -97,46 +97,46 @@
 
 <form method="post">
     <table class="data-blue">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th style="width: 50%;">Name</th>
-                    <th style="width: 25%;">Bezahlter Betrag</th>
-                    <th style="width: 25%;">Fehlender Betrag</th>
+                    <th style="width: 25%;">Name</th>
+                    <th style="width: 50%;">Beschreibung</th>
+                    <th style="width: 25%;">Summe</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@customer.GivenName @customer.Surname</td>
-                    <td>@customer.PaidAmount @Global.CurrencySign</td>
-                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems) @Global.CurrencySign</td>
                 </tr>
             </tbody>
         }
     </table>
     <table class="data-blue">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th  style="width: 30%;">Rechnungsposten</th>
+                    <th  style="width: 30%;">Kunde</th>
                     <th  style="width: 50%;">Wert</th>
                     <th  style="width: 20%;">Aktivieren</th>     
                 </tr>          
             </thead>
             <tbody>
-                @for(int i = 0; i < customer.CustomerInvoiceItems.Count; i++)
+                @for(int i = 0; i < item.CustomerInvoiceItems.Count; i++)
                 {
-                    var item = customer.CustomerInvoiceItems[i];
+                    var cii = item.CustomerInvoiceItems[i];
                     Model.Add(new(){ID = item.InvoiceItemID, Value = "" });
                     <tr>
                         <td>
                             <input type="hidden" asp-for="@Model[i].ID" value="@item.InvoiceItemID"/>
-                            @item.InvoiceItem?.Name
+                            @cii.Customer?.GivenName @cii.Customer?.Surname
                         </td>
-                        <td><input type="text" asp-for="@Model[i].Value" value="@item.Value"/></td>
-                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@item.Active"/></td>
+                        <td><input type="text" asp-for="@Model[i].Value" value="@cii.Value"/></td>
+                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@cii.Active"/></td>
                     </tr>
                 }
                 <tr>
@@ -167,46 +167,46 @@
 
 <form method="post">
     <table class="data-gray">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th style="width: 50%;">Name</th>
-                    <th style="width: 25%;">Bezahlter Betrag</th>
-                    <th style="width: 25%;">Fehlender Betrag</th>
+                    <th style="width: 25%;">Name</th>
+                    <th style="width: 50%;">Beschreibung</th>
+                    <th style="width: 25%;">Summe</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@customer.GivenName @customer.Surname</td>
-                    <td>@customer.PaidAmount @Global.CurrencySign</td>
-                    <td>@Data.CalculateData.MissingAmount(customer) @Global.CurrencySign</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@Data.CalculateData.SumCIIList(item.CustomerInvoiceItems) @Global.CurrencySign</td>
                 </tr>
             </tbody>
         }
     </table>
     <table class="data-gray">
-        @if(customer is not null)
+        @if(item is not null)
         {
             <thead>
                 <tr>
-                    <th  style="width: 30%;">Rechnungsposten</th>
+                    <th  style="width: 30%;">Kunde</th>
                     <th  style="width: 50%;">Wert</th>
                     <th  style="width: 20%;">Aktivieren</th>     
                 </tr>          
             </thead>
             <tbody>
-                @for(int i = 0; i < customer.CustomerInvoiceItems.Count; i++)
+                @for(int i = 0; i < item.CustomerInvoiceItems.Count; i++)
                 {
-                    var item = customer.CustomerInvoiceItems[i];
+                    var cii = item.CustomerInvoiceItems[i];
                     Model.Add(new(){ID = item.InvoiceItemID, Value = "" });
                     <tr>
                         <td>
                             <input type="hidden" asp-for="@Model[i].ID" value="@item.InvoiceItemID"/>
-                            @item.InvoiceItem?.Name
+                            @cii.Customer?.GivenName @cii.Customer?.Surname
                         </td>
-                        <td><input type="text" asp-for="@Model[i].Value" value="@item.Value"/></td>
-                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@item.Active"/></td>
+                        <td><input type="text" asp-for="@Model[i].Value" value="@cii.Value"/></td>
+                        <td><input type="checkbox" name="Selected" value="@item.InvoiceItemID" checked="@cii.Active"/></td>
                     </tr>
                 }
                 <tr>

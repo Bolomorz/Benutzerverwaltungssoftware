@@ -39,6 +39,8 @@ public class ManagementModel : PageModel
 
     public IActionResult OnGet() => Global.Session is null || Global.Session.User is null ? RedirectToPage("/PageSession/Login") : Page();
 
+    #region SelectPage
+    //  selecting page by clicking on navbar on the left
     public IActionResult OnPostSelectCustomers()
     {
         Information.CustomerID = null;
@@ -89,7 +91,10 @@ public class ManagementModel : PageModel
         Information.Partial = Management.Partial.InvoiceItemCustomer;
         return Page();
     }
+    #endregion
 
+    #region Create
+    //  selecting page to create new item by clicking on navbar on the left
     public IActionResult OnPostNewCustomer()
     {
         Information.CustomerID = 0;
@@ -104,7 +109,10 @@ public class ManagementModel : PageModel
         Information.Partial = Management.Partial.InvoiceItemData;
         return Page();
     }
-    
+    #endregion
+
+    #region Pick
+    //  picking item by clicking on 'EDIT' button in table
     public IActionResult OnPostPickCustomer(int? id)
     {
         Information.CustomerID = id;
@@ -119,7 +127,10 @@ public class ManagementModel : PageModel
         Information.Partial = Management.Partial.InvoiceItemData;
         return Page();
     }
-    
+    #endregion
+
+    #region Save
+    //  saving item by clicking on 'SUBMIT' button in form
     public IActionResult OnPostBookCustomer()
     {
         if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
@@ -221,7 +232,10 @@ public class ManagementModel : PageModel
         foreach(var select in selected) if(model.ID.ToString() == select) return true;
         return false;
     }
+    #endregion
 
+    #region Delete
+    //  deleting item by clicking on 'DELETE' button in table
     public IActionResult OnPostDeleteCustomer(int? id)
     {
         if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
@@ -261,7 +275,10 @@ public class ManagementModel : PageModel
 
         return Page();
     }
+    #endregion
 
+    #region Open
+    //  open file by clicking on 'OPEN' button in table
     public IActionResult OnPostOpenFile(int? id)
     {
         if(Global.Session is null || Global.Session.User is null) return RedirectToPage("/Account/Login");
@@ -277,4 +294,5 @@ public class ManagementModel : PageModel
 
         return Page();
     }
+    #endregion
 }
