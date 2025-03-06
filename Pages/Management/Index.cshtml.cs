@@ -77,6 +77,18 @@ public class ManagementModel : PageModel
         Information.Partial = Management.Partial.CustomerBooking;
         return Page();
     }
+    public IActionResult OnPostSelectInvoiceItemData()
+    {
+        Information.CustomerID = null;
+        Information.Partial = Management.Partial.InvoiceItemData;
+        return Page();
+    }
+    public IActionResult OnPostSelectInvoiceItemCustomer()
+    {
+        Information.CustomerID = null;
+        Information.Partial = Management.Partial.InvoiceItemCustomer;
+        return Page();
+    }
 
     public IActionResult OnPostNewCustomer()
     {
@@ -89,7 +101,7 @@ public class ManagementModel : PageModel
     {
         Information.CustomerID = null;
         Information.InvoiceItemID = 0;
-        Information.Partial = Management.Partial.InvoiceItem;
+        Information.Partial = Management.Partial.InvoiceItemData;
         return Page();
     }
     
@@ -104,7 +116,7 @@ public class ManagementModel : PageModel
     {
         Information.CustomerID = null;
         Information.InvoiceItemID = id;
-        Information.Partial = Management.Partial.InvoiceItem;
+        Information.Partial = Management.Partial.InvoiceItemData;
         return Page();
     }
     
@@ -171,7 +183,7 @@ public class ManagementModel : PageModel
             Global.Session.User.SaveInvoiceItem(IIDM.Name, IIDM.Description, DataModelValidation.StringToDecimal(IIDM.DefaultValue), IIDM.TransformFormula, Information.InvoiceItemID);
         Information.Message = rds.Message;
 
-        Information.Partial = rds.Message.Success ? Management.Partial.InvoiceItemList : Management.Partial.InvoiceItem;
+        Information.Partial = rds.Message.Success ? Management.Partial.InvoiceItemList : Management.Partial.InvoiceItemData;
 
         return Page();
     }
