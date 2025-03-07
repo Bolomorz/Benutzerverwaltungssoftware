@@ -16,7 +16,6 @@ internal static class DataModelValidation
     {
         if(value is null || value.Length == 0) return false;
         bool separator = false;
-        int decimalplaces = 0;
         for(int i = 0; i < value.Length; i++) 
         {
             var isnmb = IsNumber(value[i]);
@@ -25,7 +24,6 @@ internal static class DataModelValidation
             if(!isnmb && !isspr && !issgn) return false;
             if(issgn && i > 0) return false; 
             if(isspr) { if(!separator) separator = true; else return false; }
-            if(isnmb) { if(separator) { if(decimalplaces < 2) decimalplaces++; else return false; } }
         }
         return true;
     }
@@ -67,10 +65,10 @@ internal static class DataModelValidation
     {
         string result = "";
         bool separator = false;
-        int decimalplaces = 0;
+
         for(int i = 0; i < value.Length; i++)
         {
-            if(IsNumber(value[i])) if((separator && decimalplaces < 2) || !separator) {result += value[i]; decimalplaces += separator ? 1 : 0;}
+            if(IsNumber(value[i])) result += value[i];
             if(IsSeparator(value[i]) && !separator) {result += '.'; separator = true;}
             if(IsSign(value[i]) && i == 0) result += value[i];
         }
